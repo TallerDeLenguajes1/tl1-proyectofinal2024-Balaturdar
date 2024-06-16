@@ -5,6 +5,7 @@ public class Personaje{
     private int edad;
     private int fue;
     private int des;
+    private int agi;
     private int con;
     private int nivel;
     private int hAtaBase;
@@ -17,6 +18,32 @@ public class Personaje{
     private int Turno;
     private int hDefParada;
     private int hDefEsquiva;
+
+    public Personaje(string nombre, string apodo, DateTime fecNac, int edad, int fue, int des, int agi, int con, int nivel, int hAtaBase, int hDefBase, Categoria cat, Arma arma, Armadura armadura, Arma escudo)
+    {
+        this.nombre = nombre;
+        this.apodo = apodo;
+        this.fecNac = fecNac;
+        this.edad = edad;
+        this.fue = fue;
+        this.des = des;
+        this.agi = agi;
+        this.con = con;
+        this.nivel = nivel;
+        this.hAtaBase = hAtaBase;
+        this.hDefBase = hDefBase;
+        this.cat = cat;
+        
+        this.pVida = 20+ Con * 10 + cat.PV*Nivel;
+        this.arma = arma;
+        this.armadura = armadura;
+        this.escudo = escudo;
+        Turno = 20 + Agi + Des + (Cat.Turno * Nivel);
+        this.hDefParada = new Random().Next(0,HDefBase+1);
+        this.hDefEsquiva = HDefBase-HDefParada;
+        HDefParada += BonoAtributo(Des)+Cat.HParada;
+        HDefEsquiva+= BonoAtributo(Agi)+Cat.HEsquiva;
+    }
 
     public string Nombre { get => nombre; set => nombre = value; }
     public string Apodo { get => apodo; set => apodo = value; }
@@ -36,4 +63,65 @@ public class Personaje{
     public int Turno1 { get => Turno; set => Turno = value; }
     public int HDefParada { get => hDefParada; set => hDefParada = value; }
     public int HDefEsquiva { get => hDefEsquiva; set => hDefEsquiva = value; }
+    public int Agi { get => agi; set => agi = value; }
+
+    public int BonoAtributo(int atributo){
+        /*
+            1 = -30
+            2 = -20
+            3 = -10
+            4 = -5
+            5 = 0
+            6 = 5
+            7 = 5
+            8 = 10
+            9 = 10
+            10 = 15
+        */
+        if (atributo<=3)
+        {
+            return 40-10*atributo;
+        }
+        if(atributo == 4){
+            return -5;
+        }
+        if(atributo == 5){
+            return 0;
+        }
+        if(atributo %2 == 0){
+            return (atributo - 4) / 2 * 5;
+        }else{
+            return (atributo - 5) / 2 * 5;
+        }
+    }
+
+    public int CantAciones(){
+        switch (Agi +Des)
+        {
+            case <=10:
+                return 1;
+            case <=14:
+                return 2;
+            case <=19:
+                return 3;
+            case <=22:
+                return 4;
+            case <=25:
+                return 5;
+            case <=28:
+                return 6;
+            case <=31:
+                return 8;
+            case >=32:
+                return 10;
+        }
+    }
+    public void SubirNivel(){
+        Nivel++;
+        HAtaBase += Cat.HAtaque;
+        PVida += Cat.PV;
+        HDefParada += Cat.HParada;
+        HDefEsquiva += Cat.HEsquiva;
+        Turno += Cat.Turno;
+    }
 }
