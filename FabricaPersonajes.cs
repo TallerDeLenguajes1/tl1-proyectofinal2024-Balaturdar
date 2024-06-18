@@ -2,12 +2,12 @@ using System.Text.Json;
 
 public class FabricaPersonajes
 {
-    List<Armadura> armaduras;
-    List<Arma> armasComunes;
-    List<Arma> armasExoticas;
-    List<Arma> armasImprovisadas;
-    List<Arma> escudos;
-    List<Categoria> categorias;
+    List<Armadura>? armaduras;
+    List<Arma>? armasComunes;
+    List<Arma>? armasExoticas;
+    List<Arma>? armasImprovisadas;
+    List<Arma>? escudos;
+    List<Categoria>? categorias;
     string[] nombres;
     string[] apodos;
 
@@ -53,7 +53,7 @@ public class FabricaPersonajes
         int hDefBase = PD - hAtaBase;
 
         Categoria cat = categorias.ElementAt(rnd.Next(0, categorias.Count+1));
-        Arma armaPj=null;
+        Arma? armaPj = null;
         switch (rnd.Next(1, 4)) // cambiar a un solo Json
         {
             case 1:
@@ -70,7 +70,7 @@ public class FabricaPersonajes
                 break;
         }
         Armadura armadura = armaduras.ElementAt(rnd.Next(0, armaduras.Count+1));
-        Arma escudo=null;
+        Arma escudo;
         do
         {
             escudo = escudos.ElementAt(rnd.Next(0,escudos.Count+1));
