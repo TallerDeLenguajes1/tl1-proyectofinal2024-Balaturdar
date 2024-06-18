@@ -1,33 +1,35 @@
+using System.Text.Json;
+
 public class FabricaPersonajes
 {
     List<Armadura> armaduras;
     List<Arma> armasComunes;
     List<Arma> armasExoticas;
     List<Arma> armasImprovisadas;
-    List<Arma> escudos
+    List<Arma> escudos;
     List<Categoria> categorias;
     string[] nombres;
     string[] apodos;
 
     public FabricaPersonajes()
     {
-        var miHelperdeArchivos = new HelperDeJson();
-        string jsonDocument = miHelperdeArchivos.AbrirArchivoTexto("armaduras.json");
+        var miGestor = new GestorJson();
+        string jsonDocument = miGestor.AbrirArchivoTexto("armaduras.json");
         this.armaduras = JsonSerializer.Deserialize<List<Armadura>>(jsonDocument);
                 
-        jsonDocument = miHelperdeArchivos.AbrirArchivoTexto("armasComunes.json");
+        jsonDocument = miGestor.AbrirArchivoTexto("armasComunes.json");
         this.armasComunes = JsonSerializer.Deserialize<List<Arma>>(jsonDocument);
 
-        jsonDocument = miHelperdeArchivos.AbrirArchivoTexto("armasExoticas.json");
+        jsonDocument = miGestor.AbrirArchivoTexto("armasExoticas.json");
         this.armasExoticas = JsonSerializer.Deserialize<List<Arma>>(jsonDocument);
 
-        jsonDocument = miHelperdeArchivos.AbrirArchivoTexto("armasImprovisadas.json");
+        jsonDocument = miGestor.AbrirArchivoTexto("armasImprovisadas.json");
         this.armasImprovisadas = JsonSerializer.Deserialize<List<Arma>>(jsonDocument);
         
-        jsonDocument = miHelperdeArchivos.AbrirArchivoTexto("categorias.json");
+        jsonDocument = miGestor.AbrirArchivoTexto("categorias.json");
         this.categorias = JsonSerializer.Deserialize<List<Categoria>>(jsonDocument);
 
-        jsonDocument = miHelperdeArchivos.AbrirArchivoTexto("escudos.json");
+        jsonDocument = miGestor.AbrirArchivoTexto("escudos.json");
         this.escudos = JsonSerializer.Deserialize<List<Arma>>(jsonDocument);
 
         nombres = ["juan", "pepe", "jorge"];
