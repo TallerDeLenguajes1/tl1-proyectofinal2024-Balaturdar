@@ -1,67 +1,81 @@
 using System.Text.Json;
 
-public class PersonajeJson{
+public static class PersonajesJson{
 
-    string rutaDirectorioPJ = Path.GetFullPath(@"../../../personajes/");
-    string rutaDirectorioGanadores = Path.GetFullPath(@"../../../ganadores/");
+    private static string rutaPJ = Path.GetFullPath(@"../../../personajes/");
+    private static string rutaPartidaGuardada = Path.GetFullPath(@"../../../partidasGuardadas/");
+    private static string rutaGanadores = Path.GetFullPath(@"../../../ganadores/");
 
-    public void GuardarPersonajes(List<Personaje> personajes, string nombreArchivo){
-        /*Crear un método llamado GuardarPersonajes que reciba una lista de personajes, el
-        nombre del archivo y lo guarde en formato Json.*/
+    public static void GuardarEnemigos(List<Personaje> personajes, string nombrePartida){
         var miGestor = new GestorJson();
         string personajesJson = JsonSerializer.Serialize(personajes);
-        if (!Directory.Exists(rutaDirectorioPJ))
+        if (!Directory.Exists(rutaPartidaGuardada + nombrePartida))
         {
-            Directory.CreateDirectory(rutaDirectorioPJ);
+            Directory.CreateDirectory(rutaPartidaGuardada + nombrePartida);
         }
-        miGestor.GuardarArchivoTexto(rutaDirectorioPJ + nombreArchivo, personajesJson);
-
+        
+        miGestor.GuardarArchivoTexto(rutaPartidaGuardada + nombrePartida + "/enemigos.json", personajesJson);
     }
 
-    public List<Personaje>? LeerPersonajes(String nombreArchivo){
-        /*
-        Crear un método llamado LeerPersonajes que reciba un nombre de archivo y retorne la
-        lista de personajes incluidos en el son.
-        */
-        if(!Existe(nombreArchivo)){
+    public static void GuardarPersonaje(Personaje jugador, string nombrePartida){
+        var miGestor = new GestorJson();
+        string jugadorJson = JsonSerializer.Serialize(jugador);
+        if (!Directory.Exists(rutaPartidaGuardada + nombrePartida))
+        {
+            Directory.CreateDirectory(rutaPartidaGuardada + nombrePartida);
+        }
+        
+        miGestor.GuardarArchivoTexto(rutaPartidaGuardada + nombrePartida + "/jugador.json", jugadorJson);
+    }
+
+    public static List<Personaje>? LeerEnemigos(string nombrePartida){
+        if(!Existe(rutaPartidaGuardada + nombrePartida)){
             return null;
         }
         var miGestor = new GestorJson();
-        var personajesJson = miGestor.AbrirArchivoTexto(rutaDirectorioPJ + nombreArchivo);
+        var personajesJson = miGestor.AbrirArchivoTexto(rutaPartidaGuardada + nombrePartida + "/enemigos.json");
         var listadoPersonajes = JsonSerializer.Deserialize<List<Personaje>>(personajesJson);
         return listadoPersonajes;
     }
-
-    public bool Existe(string nombreArchivo){
-        /*4) Crear un método llamado Existe que reciba un nombre de archivo y que retorne un True
-        si existe y tiene datos o False en caso contrario.*/
-        return File.Exists(rutaDirectorioPJ + nombreArchivo);
+    public static Personaje? LeerJugador(string nombrePartida){
+        if(!Existe(rutaPartidaGuardada + nombrePartida)){
+            return null;
+        }
+        var miGestor = new GestorJson();
+        var jugadorJson = miGestor.AbrirArchivoTexto(rutaPartidaGuardada + nombrePartida + "/enemigos.json");
+        var jugador = JsonSerializer.Deserialize<Personaje>(jugadorJson);
+        return jugador;
     }
 
-    public void HistorialJson(){
+    public static bool Existe(string nombreArchivo){
+        return File.Exists(rutaPJ + nombreArchivo);
+    }
+
+
+    public static void HistorialJson(){
         //Armar una clase llamada HistorialJson para guardar y leer desde un archivo Json
     }
 
-    public void GuardarGanador(Personaje ganador, string informacionRelevante, string nombreArchivo){
+    public static void GuardarGanador(Personaje ganador, string informacionRelevante, string nombreArchivo){
         /*
             Crear un método llamado GuardarGanador que reciba el personaje ganador e
             información relevante de las partidas, el nombre del archivo y lo guarde en formato Json.  
         */
         var miGestor = new GestorJson();
         string personajeJson = JsonSerializer.Serialize(ganador);
-        if (!Directory.Exists(rutaDirectorioGanadores))
+        if (!Directory.Exists(rutaGanadores))
         {
-            Directory.CreateDirectory(rutaDirectorioGanadores);
+            Directory.CreateDirectory(rutaGanadores);
         }
-        miGestor.GuardarArchivoTexto(rutaDirectorioGanadores + nombreArchivo, personajeJson);
+        miGestor.GuardarArchivoTexto(rutaGanadores + nombreArchivo, personajeJson);
     }
 
-    public List<Personaje>? LeerGanadores(string nombreArchivo){
+    public static List<Personaje>? LeerGanadores(string nombreArchivo){
         /*
             Crear un método llamado LeerGanadores que reciba un nombre de archivo y retorne la
             lista de personajes ganadores e información relevante incluidos en el Json.
         */
-        string[] ganadores = Directory.GetFiles(rutaDirectorioGanadores);
+        string[] ganadores = Directory.GetFiles(rutaGanadores);
         if (ganadores != null && ganadores.Count() > 0)
         {
             var miGestor = new GestorJson();
@@ -69,7 +83,7 @@ public class PersonajeJson{
             foreach (var ganador in ganadores)
             {
                 
-                var ganadorJson = miGestor.AbrirArchivoTexto(rutaDirectorioGanadores + ganador);
+                var ganadorJson = miGestor.AbrirArchivoTexto(rutaGanadores + ganador);
                 listadoGanadores.Add(JsonSerializer.Deserialize<Personaje>(ganadorJson));
             }
             return listadoGanadores;

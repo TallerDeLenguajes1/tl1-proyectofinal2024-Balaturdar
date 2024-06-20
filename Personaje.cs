@@ -1,4 +1,5 @@
 public class Personaje{
+    
     private string nombre;
     private string apodo;
     private DateTime fecNac;
