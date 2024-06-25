@@ -1,5 +1,6 @@
-public class Personaje{
-    
+public class Personaje
+{
+
     private string nombre;
     private string apodo;
     private DateTime fecNac;
@@ -34,16 +35,17 @@ public class Personaje{
         this.hAtaBase = hAtaBase;
         this.hDefBase = hDefBase;
         this.cat = cat;
-        
-        this.pVida = 20+ Con * 10 + cat.PV*Nivel;
+
+        this.pVida = 20 + Con * 10 + BonoAtributo(Con) + cat.PV * Nivel;
         this.arma = arma;
         this.armadura = armadura;
         this.escudo = escudo;
-        Turno = 20 + Agi + Des + (Cat.Turno * Nivel);
-        this.hDefParada = new Random().Next(0,HDefBase+1);
-        this.hDefEsquiva = HDefBase-HDefParada;
-        HDefParada += BonoAtributo(Des)+Cat.HParada;
-        HDefEsquiva+= BonoAtributo(Agi)+Cat.HEsquiva;
+        Turno = 20 + Agi + Des + (Cat.Turno * Nivel) + arma.Turno + escudo.Turno + armadura.Penalizador;
+        this.hDefParada = new Random().Next(0, HDefBase + 1);
+        this.hDefEsquiva = HDefBase - HDefParada;
+
+        HDefParada += BonoAtributo(Des) + Cat.HParada + int.Parse(paradaYEsquivaEscudo(escudo)[0]);
+        HDefEsquiva += BonoAtributo(Agi) + Cat.HEsquiva + int.Parse(paradaYEsquivaEscudo(escudo)[1]);
     }
 
     public string Nombre { get => nombre; set => nombre = value; }
@@ -66,7 +68,8 @@ public class Personaje{
     public int HDefEsquiva { get => hDefEsquiva; set => hDefEsquiva = value; }
     public int Agi { get => agi; set => agi = value; }
 
-    public int BonoAtributo(int atributo){
+    public int BonoAtributo(int atributo)
+    {
         /*
             1 = -30
             2 = -20
@@ -79,50 +82,61 @@ public class Personaje{
             9 = 10
             10 = 15
         */
-        if (atributo<=3)
+        if (atributo <= 3)
         {
-            return 40-10*atributo;
+            return 40 - 10 * atributo;
         }
-        if(atributo == 4){
+        if (atributo == 4)
+        {
             return -5;
         }
-        if(atributo == 5){
+        if (atributo == 5)
+        {
             return 0;
         }
-        if(atributo %2 == 0){
+        if (atributo % 2 == 0)
+        {
             return (atributo - 4) / 2 * 5;
-        }else{
+        }
+        else
+        {
             return (atributo - 5) / 2 * 5;
         }
     }
 
-    public int CantAciones(){
-        switch (Agi +Des)
+    public int CantAciones()
+    {
+        switch (Agi + Des)
         {
-            case <=10:
+            case <= 10:
                 return 1;
-            case <=14:
+            case <= 14:
                 return 2;
-            case <=19:
+            case <= 19:
                 return 3;
-            case <=22:
+            case <= 22:
                 return 4;
-            case <=25:
+            case <= 25:
                 return 5;
-            case <=28:
+            case <= 28:
                 return 6;
-            case <=31:
+            case <= 31:
                 return 8;
-            case >=32:
+            case >= 32:
                 return 10;
         }
     }
-    public void SubirNivel(){
+    public void SubirNivel()
+    {
         Nivel++;
         HAtaBase += Cat.HAtaque;
         PVida += Cat.PV;
         HDefParada += Cat.HParada;
         HDefEsquiva += Cat.HEsquiva;
         Turno += Cat.Turno;
+    }
+
+    private string[] paradaYEsquivaEscudo(Arma escudo){
+        return escudo.Especial.Split(" / ");
     }
 }
