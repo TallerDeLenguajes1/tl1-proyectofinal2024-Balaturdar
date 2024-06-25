@@ -1,0 +1,42 @@
+[
+  {
+    "Nombre": "Rodela",
+    "Danio": 15,
+    "Turno": -15,
+    "FueR": 5,
+    "TAtaque": "CON",
+    "TAtaque2": "",
+    "Tarma": "Escudo",
+    "Especial": "10 / 5"
+  },
+  {
+    "Nombre": "Escudo",
+    "Danio": 20,
+    "Turno": -25,
+    "FueR": 7,
+    "TAtaque": "CON",
+    "TAtaque2": "",
+    "Tarma": "Escudo",
+    "Especial": "20 / 10"
+  },
+  {
+    "Nombre": "Escudo corporal",
+    "Danio": 25,
+    "Turno": -25,
+    "FueR": 10,
+    "TAtaque": "CON",
+    "TAtaque2": "",
+    "Tarma": "Escudo",
+    "Especial": "30 / 15"
+  },
+  {
+    "Nombre": "Sin Escudo",
+    "Danio": 0,
+    "Turno": 0,
+    "FueR": 0,
+    "TAtaque": "CON",
+    "TAtaque2": "",
+    "Tarma": "Escudo",
+    "Especial": "0 / 0"
+  }
+]

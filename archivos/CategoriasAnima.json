@@ -1,0 +1,90 @@
+[
+  {
+    "Nombre": "Guerrero",
+    "PuntosVida": 15,
+    "Turno": 5,
+    "Hataque": 5,
+    "Hparada": 5,
+    "Hesquiva": 0
+  },
+  {
+    "Nombre": "GUERRERO ACROBATA",
+    "PuntosVida": 10,
+    "Turno": 10,
+    "Hataque": 5,
+    "Hparada": 0,
+    "Hesquiva": 5
+  },
+  {
+    "Nombre": "PALADAN",
+    "PuntosVida": 15,
+    "Turno": 5,
+    "Hataque": 3,
+    "Hparada": 5,
+    "Hesquiva": 0
+  },
+  {
+    "Nombre": "PALADAN OSCURO",
+    "PuntosVida": 15,
+    "Turno": 5,
+    "Hataque": 5,
+    "Hparada": 3,
+    "Hesquiva": 0
+  },
+  {
+    "Nombre": "MAESTRO EN ARMAS",
+    "PuntosVida": 20,
+    "Turno": 5,
+    "Hataque": 5,
+    "Hparada": 5,
+    "Hesquiva": 0
+  },
+  {
+    "Nombre": "TECNICISTA",
+    "PuntosVida": 5,
+    "Turno": 5,
+    "Hataque": 5,
+    "Hparada": 0,
+    "Hesquiva": 3
+  },
+  {
+    "Nombre": "TAO",
+    "PuntosVida": 10,
+    "Turno": 5,
+    "Hataque": 3,
+    "Hparada": 1,
+    "Hesquiva": 3
+  },
+  {
+    "Nombre": "EXPLORADOR",
+    "PuntosVida": 10,
+    "Turno": 5,
+    "Hataque": 5,
+    "Hparada": 0,
+    "Hesquiva": 3
+  },
+  {
+    "Nombre": "SOMBRA",
+    "PuntosVida": 5,
+    "Turno": 10,
+    "Hataque": 3,
+    "Hparada": 0,
+    "Hesquiva": 4
+  },
+  {
+    "Nombre": "LADRON",
+    "PuntosVida": 5,
+    "Turno": 10,
+    "Hataque": 3,
+    "Hparada": 0,
+    "Hesquiva": 5
+  },
+  {
+    "Nombre": "ASESINO",
+    "PuntosVida": 5,
+    "Turno": 10,
+    "Hataque": 5,
+    "Hparada": 0,
+    "Hesquiva": 3
+  }
+]

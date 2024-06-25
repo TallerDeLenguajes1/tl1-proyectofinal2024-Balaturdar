@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 public class Armadura{
     private string nombre;
     private int fil;
@@ -11,24 +13,32 @@ public class Armadura{
 
     public Armadura(string nombre, int fil, int con, int pen, int cal, int ele, int fri, int ene, int penalizador)
     {
-        this.nombre = nombre;
-        this.fil = fil;
-        this.con = con;
-        this.pen = pen;
-        this.cal = cal;
-        this.ele = ele;
-        this.fri = fri;
-        this.ene = ene;
-        this.penalizador = penalizador;
+        this.Nombre = nombre;
+        this.Fil = fil;
+        this.Con = con;
+        this.Pen = pen;
+        this.Cal = cal;
+        this.Ele = ele;
+        this.Fri = fri;
+        this.Ene = ene;
+        this.Penalizador = penalizador;
     }
-
-    public string Nombre { get => nombre;}
-    public int Fil { get => fil;}
-    public int Con { get => con;}
-    public int Pen { get => pen;}
-    public int Cal { get => cal;}
-    public int Ele { get => ele;}
-    public int Fri { get => fri;}
-    public int Ene { get => ene;}
-    public int Penalizador { get => penalizador;}
+    [JsonPropertyName("nombre")]
+    public string Nombre { get => nombre; set => nombre = value; }
+    [JsonPropertyName("FIL")]
+    public int Fil { get => fil; set => fil = value; }
+    [JsonPropertyName("CON")]
+    public int Con { get => con; set => con = value; }
+    [JsonPropertyName("PEN")]
+    public int Pen { get => pen; set => pen = value; }
+    [JsonPropertyName("CAL")]
+    public int Cal { get => cal; set => cal = value; }
+    [JsonPropertyName("ELE")]
+    public int Ele { get => ele; set => ele = value; }
+    [JsonPropertyName("FRI")]
+    public int Fri { get => fri; set => fri = value; }
+    [JsonPropertyName("ENE")]
+    public int Ene { get => ene; set => ene = value; }
+    [JsonPropertyName("Penalizador")]
+    public int Penalizador { get => penalizador; set => penalizador = value; }
 }

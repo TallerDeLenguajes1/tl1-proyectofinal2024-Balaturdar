@@ -77,9 +77,9 @@ switch (opc)
             }
         } while (!aux || indice > ListadoDePartidas.Count() || indice < 0);
         Console.Clear();
-        List<Personaje>? enemigos = PersonajesJson.LeerEnemigos(ListadoDePartidas.ElementAt(indice));
+        List<Personaje>? Enemigos = PersonajesJson.LeerEnemigos(ListadoDePartidas.ElementAt(indice));
         Personaje? Jugador = PersonajesJson.LeerJugador(ListadoDePartidas.ElementAt(indice));
-        if(enemigos == null || Jugador == null){
+        if(Enemigos == null || Jugador == null){
             Console.WriteLine("no se encontraron personajes en esta partida");
             break;
         }
@@ -95,4 +95,16 @@ switch (opc)
         break;
     case 6:
         break;
+}
+
+
+static void combate(Personaje Enemigo, Personaje Jugador){
+
+}
+
+static int Tirada(){
+    int tirada = new Random().Next(1,101);
+    tirada += (tirada > 90)? new Random().Next(1,101) : 0;//la accion sale excepcionalmente bien
+    tirada -= (tirada < 5)? new Random().Next(1,101) : 0;//la accion sale excepcionalmente mal
+    return tirada;
 }

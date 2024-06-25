@@ -12,16 +12,16 @@ public class FabricaPersonajes
     public FabricaPersonajes()
     {
         var miGestor = new GestorJson();
-        string jsonDocument = miGestor.AbrirArchivoTexto("armaduras.json");
+        string jsonDocument = miGestor.AbrirArchivoTexto(Path.GetFullPath(@"../../../archivos/ArmadurasAnima.json"));
         this.armaduras = JsonSerializer.Deserialize<List<Armadura>>(jsonDocument);
                 
-        jsonDocument = miGestor.AbrirArchivoTexto("armas.json");
+        jsonDocument = miGestor.AbrirArchivoTexto(Path.GetFullPath(@"../../../archivos/ArmasAnima.json"));
         this.armas = JsonSerializer.Deserialize<List<Arma>>(jsonDocument);
 
-        jsonDocument = miGestor.AbrirArchivoTexto("categorias.json");
+        jsonDocument = miGestor.AbrirArchivoTexto(Path.GetFullPath(@"../../../archivos/CategoriasAnima.json"));
         this.categorias = JsonSerializer.Deserialize<List<Categoria>>(jsonDocument);
 
-        jsonDocument = miGestor.AbrirArchivoTexto("escudos.json");
+        jsonDocument = miGestor.AbrirArchivoTexto(Path.GetFullPath(@"../../../archivos/EscudosAnima.json"));
         this.escudos = JsonSerializer.Deserialize<List<Arma>>(jsonDocument);
 
         nombres = ["juan", "pepe", "jorge"];
@@ -45,27 +45,27 @@ public class FabricaPersonajes
         int hDefBase = PD - hAtaBase;
 
         Categoria cat = categorias.ElementAt(rnd.Next(0, categorias.Count+1));
+        Armadura armadura = armaduras.ElementAt(rnd.Next(0, armaduras.Count+1));
 
         Arma armaPj;
         if(fue < 3){
-            armaPj = armas.ElementAt(41);
+            armaPj = armas.ElementAt(40);// desarmado
         }else{
             do
             {
                 armaPj = armas.ElementAt(rnd.Next(0, armas.Count+1));
-            } while (armaPj.FueR < fue);
+            } while (armaPj.FueR > fue);
         }
         
-        Armadura armadura = armaduras.ElementAt(rnd.Next(0, armaduras.Count+1));
 
         Arma escudo;
-        if(fue < 5){
-            escudo = escudos.ElementAt(3);
+        if(fue < 5 || armaPj.Especial == "A dos manos"){
+            escudo = escudos.ElementAt(3);//sin escudo
         }else{
             do
             {
                 escudo = escudos.ElementAt(rnd.Next(0,escudos.Count+1));
-            } while (escudo.FueR <= fue);
+            } while (escudo.FueR > fue);
         }
 
         return new Personaje(nombre, apodo,fecNaci,edad,fue,des,agi,con,nivel,hAtaBase,hDefBase,cat,armaPj,armadura,escudo);

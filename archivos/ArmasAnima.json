@@ -1,0 +1,652 @@
+[
+  {
+    "Nombre": "Alabarda",
+    "Danio": 60,
+    "Turno": -15,
+    "FueR": 6,
+    "TAtaque": "FIL",
+    "TAtaque2": "CON",
+    "Tarma": "Asta / Mandoble",
+    "Especial": "A dos manos"
+  },
+  {
+    "Nombre": "Arpon",
+    "Danio": 35,
+    "Turno": -5,
+    "FueR": 5,
+    "TAtaque": "PEN",
+    "TAtaque2": "",
+    "Tarma": "Asta",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Arpon",
+    "Danio": 35,
+    "Turno": -5,
+    "FueR": 5,
+    "TAtaque": "PEN",
+    "TAtaque2": "",
+    "Tarma": "Asta",
+    "Especial": "A dos manos"
+  },
+  {
+    "Nombre": "Cadena",
+    "Danio": 25,
+    "Turno": 0,
+    "FueR": 6,
+    "TAtaque": "CON",
+    "TAtaque2": "",
+    "Tarma": "Cuerda",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Cestus",
+    "Danio": 25,
+    "Turno": 10,
+    "FueR": 3,
+    "TAtaque": "PEN",
+    "TAtaque2": "FIL",
+    "Tarma": "Arma corta",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Cimitarra",
+    "Danio": 50,
+    "Turno": -5,
+    "FueR": 5,
+    "TAtaque": "FIL",
+    "TAtaque2": "",
+    "Tarma": "Espada",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Daga",
+    "Danio": 30,
+    "Turno": 20,
+    "FueR": 3,
+    "TAtaque": "PEN",
+    "TAtaque2": "FIL",
+    "Tarma": "Arma corta",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Espada ancha",
+    "Danio": 55,
+    "Turno": -5,
+    "FueR": 5,
+    "TAtaque": "FIL",
+    "TAtaque2": "",
+    "Tarma": "Espada",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Espada bastarda",
+    "Danio": 70,
+    "Turno": -30,
+    "FueR": 7,
+    "TAtaque": "FIL",
+    "TAtaque2": "CON",
+    "Tarma": "Espada /Mandoble",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Espada bastarda",
+    "Danio": 70,
+    "Turno": -30,
+    "FueR": 9,
+    "TAtaque": "FIL",
+    "TAtaque2": "CON",
+    "Tarma": "Espada /Mandoble",
+    "Especial": "A dos manos"
+  },
+  {
+    "Nombre": "Espada corta",
+    "Danio": 40,
+    "Turno": 15,
+    "FueR": 4,
+    "TAtaque": "PEN",
+    "TAtaque2": "FIL",
+    "Tarma": "Arma corta",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Espada larga",
+    "Danio": 50,
+    "Turno": 0,
+    "FueR": 6,
+    "TAtaque": "FIL",
+    "TAtaque2": "",
+    "Tarma": "Espada",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Estilete",
+    "Danio": 25,
+    "Turno": 20,
+    "FueR": 3,
+    "TAtaque": "PEN",
+    "TAtaque2": "",
+    "Tarma": "Arma corta",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Estoque",
+    "Danio": 40,
+    "Turno": 15,
+    "FueR": 4,
+    "TAtaque": "PEN",
+    "TAtaque2": "FIL",
+    "Tarma": "Espada",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Florete",
+    "Danio": 35,
+    "Turno": 15,
+    "FueR": 3,
+    "TAtaque": "PEN",
+    "TAtaque2": "",
+    "Tarma": "Espada / Arma corta",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Garfio",
+    "Danio": 30,
+    "Turno": 10,
+    "FueR": 3,
+    "TAtaque": "PEN",
+    "TAtaque2": "",
+    "Tarma": "Arma corta",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Garrote",
+    "Danio": 30,
+    "Turno": 0,
+    "FueR": 5,
+    "TAtaque": "CON",
+    "TAtaque2": "",
+    "Tarma": "Maza",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Gran martillo de Guerra",
+    "Danio": 70,
+    "Turno": -35,
+    "FueR": 7,
+    "TAtaque": "CON",
+    "TAtaque2": "",
+    "Tarma": "Maza",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Gran martillo de Guerra",
+    "Danio": 70,
+    "Turno": -35,
+    "FueR": 10,
+    "TAtaque": "CON",
+    "TAtaque2": "",
+    "Tarma": "Maza",
+    "Especial": "A dos manos"
+  },
+  {
+    "Nombre": "Guadania",
+    "Danio": 35,
+    "Turno": 0,
+    "FueR": 5,
+    "TAtaque": "FIL",
+    "TAtaque2": "CON",
+    "Tarma": "Asta / Mandoble",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Guadania",
+    "Danio": 35,
+    "Turno": 0,
+    "FueR": 9,
+    "TAtaque": "FIL",
+    "TAtaque2": "CON",
+    "Tarma": "Asta / Mandoble",
+    "Especial": "A dos manos"
+  },
+  {
+    "Nombre": "Hacha a dos manos",
+    "Danio": 100,
+    "Turno": -70,
+    "FueR": 9,
+    "TAtaque": "FIL",
+    "TAtaque2": "CON",
+    "Tarma": "Hacha / Mandoble",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Hacha a dos manos",
+    "Danio": 100,
+    "Turno": -70,
+    "FueR": 11,
+    "TAtaque": "FIL",
+    "TAtaque2": "CON",
+    "Tarma": "Hacha / Mandoble",
+    "Especial": "A dos manos"
+  },
+  {
+    "Nombre": "Hacha de guerra",
+    "Danio": 70,
+    "Turno": -30,
+    "FueR": 7,
+    "TAtaque": "FIL",
+    "TAtaque2": "CON",
+    "Tarma": "Hacha",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Hacha de mano",
+    "Danio": 45,
+    "Turno": 0,
+    "FueR": 5,
+    "TAtaque": "FIL",
+    "TAtaque2": "",
+    "Tarma": "Hacha",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Lanza",
+    "Danio": 40,
+    "Turno": 5,
+    "FueR": 4,
+    "TAtaque": "PEN",
+    "TAtaque2": "",
+    "Tarma": "Asta",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Lanza",
+    "Danio": 40,
+    "Turno": 5,
+    "FueR": 6,
+    "TAtaque": "PEN",
+    "TAtaque2": "",
+    "Tarma": "Asta",
+    "Especial": "A dos manos"
+  },
+  {
+    "Nombre": "Latigo",
+    "Danio": 35,
+    "Turno": -20,
+    "FueR": 4,
+    "TAtaque": "FIL",
+    "TAtaque2": "CON",
+    "Tarma": "Cuerda",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Mandoble",
+    "Danio": 90,
+    "Turno": -60,
+    "FueR": 8,
+    "TAtaque": "FIL",
+    "TAtaque2": "CON",
+    "Tarma": "Mandoble",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Mandoble",
+    "Danio": 90,
+    "Turno": -60,
+    "FueR": 10,
+    "TAtaque": "FIL",
+    "TAtaque2": "CON",
+    "Tarma": "Mandoble",
+    "Especial": "A dos manos"
+  },
+  {
+    "Nombre": "Mangual",
+    "Danio": 80,
+    "Turno": -50,
+    "FueR": 8,
+    "TAtaque": "CON",
+    "TAtaque2": "",
+    "Tarma": "Maza / Mandoble",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Martillo de guerra",
+    "Danio": 50,
+    "Turno": -5,
+    "FueR": 6,
+    "TAtaque": "CON",
+    "TAtaque2": "",
+    "Tarma": "Maza",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Mayal",
+    "Danio": 40,
+    "Turno": 0,
+    "FueR": 6,
+    "TAtaque": "CON",
+    "TAtaque2": "",
+    "Tarma": "Maza / Cuerda",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Maza",
+    "Danio": 40,
+    "Turno": 0,
+    "FueR": 6,
+    "TAtaque": "CON",
+    "TAtaque2": "",
+    "Tarma": "Maza",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Maza pesada de combate",
+    "Danio": 60,
+    "Turno": -15,
+    "FueR": 6,
+    "TAtaque": "CON",
+    "TAtaque2": "",
+    "Tarma": "Maza / Mandoble",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Maza pesada de combate",
+    "Danio": 60,
+    "Turno": -15,
+    "FueR": 10,
+    "TAtaque": "CON",
+    "TAtaque2": "",
+    "Tarma": "Maza / Mandoble",
+    "Especial": "A dos manos"
+  },
+  {
+    "Nombre": "Sable",
+    "Danio": 45,
+    "Turno": 10,
+    "FueR": 6,
+    "TAtaque": "FIL",
+    "TAtaque2": "PEN",
+    "Tarma": "Espada",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Tridente",
+    "Danio": 40,
+    "Turno": -10,
+    "FueR": 6,
+    "TAtaque": "PEN",
+    "TAtaque2": "",
+    "Tarma": "Asta",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Tridente",
+    "Danio": 40,
+    "Turno": -10,
+    "FueR": 7,
+    "TAtaque": "PEN",
+    "TAtaque2": "",
+    "Tarma": "Asta",
+    "Especial": "A dos manos"
+  },
+  {
+    "Nombre": "Vara",
+    "Danio": 30,
+    "Turno": 10,
+    "FueR": 4,
+    "TAtaque": "CON",
+    "TAtaque2": "",
+    "Tarma": "Asta",
+    "Especial": "A dos manos"
+  },
+  {
+    "Nombre": "desarmado",
+    "Danio": 10,
+    "Turno": 20,
+    "FueR": 0,
+    "TAtaque": "CON",
+    "TAtaque2": "",
+    "Tarma": "Sin armas",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Botella rota",
+    "Danio": 15,
+    "Turno": 10,
+    "FueR": 3,
+    "TAtaque": "FIL",
+    "TAtaque2": "CON",
+    "Tarma": "Arma corta",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Silla",
+    "Danio": 25,
+    "Turno": -20,
+    "FueR": 5,
+    "TAtaque": "CON",
+    "TAtaque2": "",
+    "Tarma": "Mandoble",
+    "Especial": "A dos manos"
+  },
+  {
+    "Nombre": "Palo de madera",
+    "Danio": 20,
+    "Turno": 0,
+    "FueR": 4,
+    "TAtaque": "CON",
+    "TAtaque2": "",
+    "Tarma": "Maza",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Barra metalica",
+    "Danio": 25,
+    "Turno": -5,
+    "FueR": 5,
+    "TAtaque": "CON",
+    "TAtaque2": "",
+    "Tarma": "Maza",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Cuchillo de cocina",
+    "Danio": 25,
+    "Turno": 10,
+    "FueR": 4,
+    "TAtaque": "FIL",
+    "TAtaque2": "",
+    "Tarma": "Arma corta",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Martillo",
+    "Danio": 30,
+    "Turno": -20,
+    "FueR": 4,
+    "TAtaque": "CON",
+    "TAtaque2": "",
+    "Tarma": "Maza",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Hacha de leniador",
+    "Danio": 40,
+    "Turno": -10,
+    "FueR": 5,
+    "TAtaque": "FIL",
+    "TAtaque2": "",
+    "Tarma": "Hacha",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Hacha de leniador",
+    "Danio": 40,
+    "Turno": -10,
+    "FueR": 7,
+    "TAtaque": "FIL",
+    "TAtaque2": "",
+    "Tarma": "Hacha",
+    "Especial": "A dos manos"
+  },
+  {
+    "Nombre": "Azada",
+    "Danio": 30,
+    "Turno": -20,
+    "FueR": 4,
+    "TAtaque": "FIL",
+    "TAtaque2": "CON",
+    "Tarma": "Hacha",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Hoz",
+    "Danio": 35,
+    "Turno": -10,
+    "FueR": 4,
+    "TAtaque": "FIL",
+    "TAtaque2": "PEN",
+    "Tarma": "Arma corta",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Pico",
+    "Danio": 40,
+    "Turno": -20,
+    "FueR": 5,
+    "TAtaque": "PEN",
+    "TAtaque2": "",
+    "Tarma": "Arma corta",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Antorcha",
+    "Danio": 20,
+    "Turno": -10,
+    "FueR": 4,
+    "TAtaque": "CON",
+    "TAtaque2": "CAL",
+    "Tarma": "Maza",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Katana",
+    "Danio": 50,
+    "Turno": 0,
+    "FueR": 5,
+    "TAtaque": "FIL",
+    "TAtaque2": "",
+    "Tarma": "Espada",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Katana",
+    "Danio": 50,
+    "Turno": 0,
+    "FueR": 6,
+    "TAtaque": "FIL",
+    "TAtaque2": "",
+    "Tarma": "Espada",
+    "Especial": "A dos manos"
+  },
+  {
+    "Nombre": "Katar",
+    "Danio": 40,
+    "Turno": 10,
+    "FueR": 8,
+    "TAtaque": "PEN",
+    "TAtaque2": "FIL",
+    "Tarma": "Arma corta",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Garras",
+    "Danio": 30,
+    "Turno": 15,
+    "FueR": 4,
+    "TAtaque": "FIL",
+    "TAtaque2": "PEN",
+    "Tarma": "Arma corta",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Nunchaku",
+    "Danio": 30,
+    "Turno": 15,
+    "FueR": 5,
+    "TAtaque": "CON",
+    "TAtaque2": "",
+    "Tarma": "Cuerda",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Quebradora",
+    "Danio": 50,
+    "Turno": -20,
+    "FueR": 8,
+    "TAtaque": "CON",
+    "TAtaque2": "FIL",
+    "Tarma": "Mandoble",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Quebradora",
+    "Danio": 50,
+    "Turno": -20,
+    "FueR": 10,
+    "TAtaque": "CON",
+    "TAtaque2": "FIL",
+    "Tarma": "Mandoble",
+    "Especial": "A dos manos"
+  },
+  {
+    "Nombre": "Cuervo",
+    "Danio": 35,
+    "Turno": 10,
+    "FueR": 4,
+    "TAtaque": "CON",
+    "TAtaque2": "FIL",
+    "Tarma": "Arma corta",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Nodachi",
+    "Danio": 80,
+    "Turno": -35,
+    "FueR": 10,
+    "TAtaque": "FIL",
+    "TAtaque2": "",
+    "Tarma": "Mandoble",
+    "Especial": "A dos manos"
+  },
+  {
+    "Nombre": "Tanto",
+    "Danio": 40,
+    "Turno": 20,
+    "FueR": 3,
+    "TAtaque": "FIL",
+    "TAtaque2": "",
+    "Tarma": "Arma corta",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Tonfa",
+    "Danio": 30,
+    "Turno": 20,
+    "FueR": 4,
+    "TAtaque": "CON",
+    "TAtaque2": "",
+    "Tarma": "Arma corta",
+    "Especial": "A una mano"
+  },
+  {
+    "Nombre": "Kusari-Gama",
+    "Danio": 40,
+    "Turno": 5,
+    "FueR": 5,
+    "TAtaque": "FIL",
+    "TAtaque2": "CON",
+    "Tarma": "Arma corta / Cuerda",
+    "Especial": "A dos manos"
+  }
+]

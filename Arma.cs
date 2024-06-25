@@ -5,39 +5,27 @@ public class Arma{
     private int danio;
     private int turno;
     private int fueR;
-    private string crt1;
-    private string? crt2;
+    private string tAtaque;
+    private string? tAtaque2;
     private string tArma;
     private string especial;
 
+
     [JsonPropertyName("Nombre")]
-    public string Nombre { get; set; }
+    public string Nombre { get => nombre; set => nombre = value; }
     [JsonPropertyName("Danio")]
-    public int Danio { get; set; }
+    public int Danio { get => danio; set => danio = value; }
     [JsonPropertyName("Turno")]
-    public int Turno { get; set; }
+    public int Turno { get => turno; set => turno = value; }
     [JsonPropertyName("FueR")]
-    public int FueR { get; set; }
+    public int FueR { get => fueR; set => fueR = value; }
     [JsonPropertyName("TAtaque")]
-    public string TAtaque { get; set; }
-    [JsonPropertyName("TAtaque 2")]
-    public string TAtaque2 { get; set; }
+    public string TAtaque { get => tAtaque; set => tAtaque = value; }
+    [JsonPropertyName("TAtaque2")]
+    public string? TAtaque2 { get => tAtaque2; set => tAtaque2 = value; }
     [JsonPropertyName("Tarma")]
-    public string Tarma { get; set; }
+    public string TArma { get => tArma; set => tArma = value; }
     [JsonPropertyName("Especial")]
-    public string Especial { get; set; }
-
-    public Arma(string nombre, int danio, int turno, int fueR, string crt1, string crt2, string tArma, string especial)
-    {
-        this.nombre = nombre;
-        this.danio = danio;
-        this.turno = turno;
-        this.fueR = fueR;
-        this.crt1 = crt1;
-        this.crt2 = crt2;
-        this.tArma = tArma;
-        this.especial = especial;
-    }
-
+    public string Especial { get => especial; set => especial = value; }
 }
 
