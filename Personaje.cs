@@ -17,7 +17,7 @@ public class Personaje
     private Arma arma;
     private Arma escudo;
     private Armadura armadura;
-    private int Turno;
+    private int turno;
     private int hDefParada;
     private int hDefEsquiva;
 
@@ -40,12 +40,12 @@ public class Personaje
         this.arma = arma;
         this.armadura = armadura;
         this.escudo = escudo;
-        Turno = 20 + Agi + Des + (Cat.Turno * Nivel) + arma.Turno + escudo.Turno + armadura.Penalizador;
+        turno = 20 + Agi + Des + (Cat.Turno * Nivel) + arma.Turno + escudo.Turno + armadura.Penalizador;
         this.hDefParada = new Random().Next(0, HDefBase + 1);
         this.hDefEsquiva = HDefBase - HDefParada;
 
-        HDefParada += BonoAtributo(Des) + Cat.HParada + int.Parse(paradaYEsquivaEscudo(escudo)[0]);
-        HDefEsquiva += BonoAtributo(Agi) + Cat.HEsquiva + int.Parse(paradaYEsquivaEscudo(escudo)[1]);
+        HDefParada += BonoAtributo(Des) + Cat.HParada*Nivel + int.Parse(paradaYEsquivaEscudo(escudo)[0]);
+        HDefEsquiva += BonoAtributo(Agi) + Cat.HEsquiva*Nivel + int.Parse(paradaYEsquivaEscudo(escudo)[1]);
     }
 
     public string Nombre { get => nombre; set => nombre = value; }
@@ -63,7 +63,7 @@ public class Personaje
     public Arma Arma { get => arma; set => arma = value; }
     public Arma Escudo { get => escudo; set => escudo = value; }
     public Armadura Armadura { get => armadura; set => armadura = value; }
-    public int Turno1 { get => Turno; set => Turno = value; }
+    public int Turno { get => turno; set => turno = value; }
     public int HDefParada { get => hDefParada; set => hDefParada = value; }
     public int HDefEsquiva { get => hDefEsquiva; set => hDefEsquiva = value; }
     public int Agi { get => agi; set => agi = value; }
@@ -133,10 +133,44 @@ public class Personaje
         PVida += Cat.PV;
         HDefParada += Cat.HParada;
         HDefEsquiva += Cat.HEsquiva;
-        Turno += Cat.Turno;
+        turno += Cat.Turno;
     }
 
     private string[] paradaYEsquivaEscudo(Arma escudo){
         return escudo.Especial.Split(" / ");
+    }
+
+    public int Ataque(){
+        return HAtaBase + BonoAtributo(Des);
+    }
+
+    public int Absorcion(string tipoAtaque){
+        int ptoarmadura = 0;
+        switch (tipoAtaque)
+        {
+            case "FIL":
+                ptoarmadura = Armadura.Fil;
+                break;
+            case "CON":
+                ptoarmadura = Armadura.Con;
+                break;
+            case "PEN":
+                ptoarmadura = Armadura.Pen;
+                break;
+            case "CAL":
+                ptoarmadura = Armadura.Cal;
+                break;
+            case "ELE":
+                ptoarmadura = Armadura.Ele;
+                break;
+            case "FRI":
+                ptoarmadura = Armadura.Fri;
+                break;
+            case "ENE":
+                ptoarmadura = Armadura.Ene;
+                break;
+        }
+
+        return 20+ptoarmadura;
     }
 }
