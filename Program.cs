@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.VisualBasic;
+
 int opc;
 bool aux;
 Console.WriteLine("***********************");
@@ -35,12 +37,12 @@ switch (opc)
         do
         {
             nombre = Console.ReadLine();
-            if (nombre == null && nombre.Count() == 0)
+            if (nombre == null || nombre.Count() == 0)
             {
                 Console.Clear();
                 Console.WriteLine("** por favor,ingrese un nombre para guardar la partida **");
             }
-        } while (nombre == null && nombre.Count() == 0);
+        } while (nombre == null || nombre.Count() == 0);
         
         foreach (string partida in ListadoDePartidas)
         {
@@ -98,13 +100,111 @@ switch (opc)
 }
 
 
-static void combate(Personaje Enemigo, Personaje Jugador){
+static void combate(List<Personaje> Enemigos, Personaje Jugador){
+    var Enemigo = Enemigos.ElementAt(0);
+    Personaje primero, segundo;
+
+    if (Enemigo.Turno + Tirada() > Jugador.Turno + Tirada())
+    {
+        primero = Enemigo;
+        segundo = Jugador;
+    }else{
+        primero = Jugador;
+        segundo = Enemigo;
+    }
+    do
+    {
+        Pelea(primero, segundo, false);
+        if(Jugador.PVida<=0){
+            //fin partida
+        }
+        if(Enemigo.PVida<=0){
+            //termina pelea
+            break;
+        }
+        Pelea(segundo,primero, false);
+        if(Jugador.PVida<=0){
+            //fin partida
+        }
+        if(Enemigo.PVida<=0){
+            //termina pelea
+            break;
+        }
+    } while (true);
+    
+    
+    
+    
+    //guardar
+    if(Enemigos.Count()>0){
+        Console.WriteLine("¿Seguir Peleando?");
+        //si / no breack;
+        if(Console.ReadLine() != "S" && Console.ReadLine() != "s"){
+            //break;
+        }
+    }else{
+        //agregar jugador a ganadores,
+        //mensaje
+        //info jugador
+        //borrar partida
+        //break;
+    }
 
 }
+
 
 static int Tirada(){
     int tirada = new Random().Next(1,101);
     tirada += (tirada > 90)? new Random().Next(1,101) : 0;//la accion sale excepcionalmente bien
     tirada -= (tirada < 5)? new Random().Next(1,101) : 0;//la accion sale excepcionalmente mal
     return tirada;
+}
+
+static void Pelea(Personaje atacante, Personaje defensor , bool contraataque)    
+{
+    var tiradaAtaque = Tirada();
+    var tiradaDefensa = Tirada();
+    var ataqueFinal = atacante.Ataque() +tiradaAtaque;
+    var defensaFinal = (defensor.HDefEsquiva > defensor.HDefParada) ? defensor.HDefEsquiva : defensor.HDefParada;
+    defensaFinal += tiradaDefensa;
+    var aux = ataqueFinal - defensaFinal;
+    Console.WriteLine($"Habilidad de Ataque: {ataqueFinal}\nHabilidad de Defensa: {defensaFinal}");
+    switch (aux)
+    {
+        case < -50://contraataque
+            if (!contraataque)
+            {
+                Console.WriteLine($"{atacante.Nombre} falla el ataque, ¡{defensor.Nombre} puede contraatacar!");
+                Pelea(defensor, atacante, true);
+                break;
+            }
+            Console.WriteLine($"{atacante.Nombre} falla el contraataque");
+            break;
+        case <= 0://ataque rechazado por el defensor
+            Console.WriteLine($"{defensor.Nombre}, logra rechazar el ataque de {atacante.Nombre}");
+            Console.WriteLine($"le quedan {defensor.PVida} puntos de vida");
+            break;
+        case < 10://impacta pero no logra hacer daño
+            Console.WriteLine($"¡¡¡IMPACTO!!!\nEl ataque apenas logra superar la defensa de {defensor.Nombre}, pero no lo suficiente para hacer daño");
+            Console.WriteLine($"le quedan {defensor.PVida} puntos de vida");
+            break;
+        case >= 10://impacta
+            var danio = atacante.Arma.Danio + (int)Math.Floor((double)(aux / 10));
+            if (danio - defensor.Absorcion(atacante.Arma.TArma) > 10)
+            {
+                //mensaje impacta y hace daño
+                danio -= defensor.Absorcion(atacante.Arma.TArma);
+                defensor.PVida -= danio;
+                Console.WriteLine($"¡¡¡IMPACTO!!!\nEl ataque atraviesa la armadura de {defensor.Nombre} y realiza {danio} puntos de daño");
+                Console.WriteLine($"le quedan {defensor.PVida} puntos de vida");
+                
+            }
+            else
+            {
+                //mensaje impacta y pero su armadura resiste
+                Console.WriteLine($"¡¡¡IMPACTO!!!\nEl ataque supera la defensa de {defensor.Nombre}, pero no logra atravezar su armadura");
+                Console.WriteLine($"le quedan {defensor.PVida} puntos de vida");
+            }
+            break;
+    }
 }
