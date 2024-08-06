@@ -1,48 +1,46 @@
+using System.ComponentModel;
 using System.Text.Json;
 
 public static class PersonajesJson{
 
-    private static string rutaPJ = Path.GetFullPath(@"../../../personajes/");
-    private static string rutaPartidaGuardada = Path.GetFullPath(@"../../../partidasGuardadas/");
-    private static string rutaGanadores = Path.GetFullPath(@"../../../ganadores/");
-
+    private static string rutaPJ = Path.GetFullPath(@"../tl1-proyectofinal2024-Balaturdar/personajes/");
+    private static string rutaPartidaGuardada = Path.GetFullPath(@"../tl1-proyectofinal2024-Balaturdar/partidasGuardadas/");
+    private static string rutaGanadores = Path.GetFullPath(@"../tl1-proyectofinal2024-Balaturdar/ganadores/");
     public static void GuardarEnemigos(List<Personaje> personajes, string nombrePartida){
-        var miGestor = new GestorJson();
         string personajesJson = JsonSerializer.Serialize(personajes);
         if (!Directory.Exists(rutaPartidaGuardada + nombrePartida))
         {
             Directory.CreateDirectory(rutaPartidaGuardada + nombrePartida);
         }
         
-        miGestor.GuardarArchivoTexto(rutaPartidaGuardada + nombrePartida + "/enemigos.json", personajesJson);
+        GestorJson.GuardarArchivoTexto(rutaPartidaGuardada + nombrePartida + "/enemigos.json", personajesJson);
     }
 
     public static void GuardarPersonaje(Personaje jugador, string nombrePartida){
-        var miGestor = new GestorJson();
         string jugadorJson = JsonSerializer.Serialize(jugador);
         if (!Directory.Exists(rutaPartidaGuardada + nombrePartida))
         {
             Directory.CreateDirectory(rutaPartidaGuardada + nombrePartida);
         }
         
-        miGestor.GuardarArchivoTexto(rutaPartidaGuardada + nombrePartida + "/jugador.json", jugadorJson);
+        GestorJson.GuardarArchivoTexto(rutaPartidaGuardada + nombrePartida + "/jugador.json", jugadorJson);
     }
 
     public static List<Personaje>? LeerEnemigos(string nombrePartida){
-        if(!Existe(rutaPartidaGuardada + nombrePartida)){
-            return null;
-        }
-        var miGestor = new GestorJson();
-        var personajesJson = miGestor.AbrirArchivoTexto(rutaPartidaGuardada + nombrePartida + "/enemigos.json");
+        //var carpetapartidaguardada = Path.GetFullPath(rutaPartidaGuardada + nombrePartida + "/enemigos.json");
+        //if(Existe(carpetapartidaguardada)){
+        //    return null;
+        //}
+        
+        var personajesJson = GestorJson.AbrirArchivoTexto(rutaPartidaGuardada + nombrePartida + "/enemigos.json");
         var listadoPersonajes = JsonSerializer.Deserialize<List<Personaje>>(personajesJson);
         return listadoPersonajes;
     }
     public static Personaje? LeerJugador(string nombrePartida){
-        if(!Existe(rutaPartidaGuardada + nombrePartida)){
-            return null;
-        }
-        var miGestor = new GestorJson();
-        var jugadorJson = miGestor.AbrirArchivoTexto(rutaPartidaGuardada + nombrePartida + "/Jugador.json");
+        //if(!Existe(rutaPartidaGuardada + nombrePartida)){
+        //    return null;
+        //}
+        var jugadorJson = GestorJson.AbrirArchivoTexto(rutaPartidaGuardada + nombrePartida + "/Jugador.json");
         var jugador = JsonSerializer.Deserialize<Personaje>(jugadorJson);
         return jugador;
     }
@@ -61,14 +59,13 @@ public static class PersonajesJson{
             Crear un método llamado GuardarGanador que reciba el personaje ganador e
             información relevante de las partidas, el nombre del archivo y lo guarde en formato Json.  
         */
-        var miGestor = new GestorJson();
         string personajeJson = JsonSerializer.Serialize(ganador);
         if (!Directory.Exists(rutaGanadores))
         {
             Directory.CreateDirectory(rutaGanadores);
         }
         string nombreArchivo = ganador.Nombre + "json";
-        miGestor.GuardarArchivoTexto(rutaGanadores + nombreArchivo, personajeJson);
+        GestorJson.GuardarArchivoTexto(rutaGanadores + nombreArchivo, personajeJson);
     }
 
     public static List<Personaje>? LeerGanadores(string nombreArchivo){
@@ -79,13 +76,15 @@ public static class PersonajesJson{
         string[] ganadores = Directory.GetFiles(rutaGanadores);
         if (ganadores != null && ganadores.Count() > 0)
         {
-            var miGestor = new GestorJson();
-            List<Personaje>? listadoGanadores = new List<Personaje>();
+            
+            List<Personaje> listadoGanadores = new List<Personaje>();
             foreach (var ganador in ganadores)
             {
                 
-                var ganadorJson = miGestor.AbrirArchivoTexto(rutaGanadores + ganador);
-                listadoGanadores.Add(JsonSerializer.Deserialize<Personaje>(ganadorJson));
+                var ganadorJson = GestorJson.AbrirArchivoTexto(rutaGanadores + ganador);
+                if (ganadorJson != null){
+                    listadoGanadores.Add(JsonSerializer.Deserialize<Personaje>(ganadorJson));
+                }
             }
             return listadoGanadores;
         }else{
@@ -100,7 +99,7 @@ public static class PersonajesJson{
         {
             Directory.CreateDirectory(rutaPartidaGuardada);
         }
-
+        
 
         List<string> ListadoDePartidas = Directory.GetDirectories(rutaPartidaGuardada).ToList();
 
@@ -145,6 +144,13 @@ public static class PersonajesJson{
         int indice = 1;
 
         List<string> ListadoDePartidas = Directory.GetDirectories(rutaPartidaGuardada).ToList();
+
+        if(ListadoDePartidas == null || ListadoDePartidas.Count()< 1){
+            Console.WriteLine("no saved games found");
+            Console.WriteLine("Press any key to exit... ");
+            Console.ReadKey();
+            return null;
+        }
         foreach (string partida in ListadoDePartidas)
         {
             Console.WriteLine(indice + "- " + partida);
@@ -157,14 +163,20 @@ public static class PersonajesJson{
                 Console.WriteLine("debe ingresar un numero para seleccionar una partida");
             }
             if(indice > ListadoDePartidas.Count() || indice < 0){
-                Console.WriteLine("ingrese una opcion valida");;
+                Console.WriteLine("ingrese una opcion valida");
             }
         } while (!aux || indice > ListadoDePartidas.Count() || indice < 0);
         Console.Clear();
-        string nombrePartida = ListadoDePartidas.ElementAt(indice);
-        Enemigos = LeerEnemigos(nombrePartida);
-        Jugador = LeerJugador(nombrePartida);
+        string nombrePartida = ListadoDePartidas.ElementAt(indice-1);
         return nombrePartida;
+    }
+
+    public static List<string> ListaDePartidasGuardadas(){
+        if (!Directory.Exists(rutaPartidaGuardada))
+        {
+            Directory.CreateDirectory(rutaPartidaGuardada);
+        }
+        return Directory.GetDirectories(rutaPartidaGuardada).ToList();
     }
     
 }

@@ -1,8 +1,8 @@
 
-    public class GestorJson
+    public static class GestorJson
     {
 
-        public string AbrirArchivoTexto(string nombreArchivo)
+        public static string AbrirArchivoTexto(string nombreArchivo)
         {
             string documento;
               using (var archivoOpen = new FileStream(nombreArchivo, FileMode.Open))
@@ -13,12 +13,10 @@
                     archivoOpen.Close();
                 }
             }
-
-
             return documento;
         }
 
-        public void GuardarArchivoTexto(string nombreArchivo, string datos)
+        public static void GuardarArchivoTexto(string nombreArchivo, string datos)
         {
              using(var archivo = new FileStream(nombreArchivo, FileMode.Create))
             {
