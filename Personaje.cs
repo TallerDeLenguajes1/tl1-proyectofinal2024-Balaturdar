@@ -186,9 +186,9 @@ public class Personaje
                "\nAgility: " + Agi +
                "\nConstitution: " + Con +
                "\nlevel: " + Nivel +
-               "\nClass: " + Cat +
-               "\nweapon: " + Arma +
-               "\nShield: " + Escudo +
-               "\nArmor: " + Armadura;
+               "\nClass: " + Cat.Nombre +
+               "\nweapon: " + Arma.Nombre + " - danio: "+ Arma.Danio + " - tipo de arma: " + Arma.TArma +
+               "\nShield: " + Escudo.Nombre + 
+               "\nArmor: " + Armadura.Nombre;
     }
 }

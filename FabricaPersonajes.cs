@@ -51,9 +51,29 @@ public class FabricaPersonajes
         Random rnd = new Random();
         int PD = (300 + i * 100) / 2;
         string nombre = nombres[rnd.Next(0, nombres.Count())];
-        string apodo = apodos[rnd.Next(0, apodos.Count()) ]; ;
+        string apodo = apodos[rnd.Next(0, apodos.Count())]; ;
         int edad = rnd.Next(20, 301);
-        DateTime fecNaci = DateTime.Parse(rnd.Next(1, 31) + "/" + rnd.Next(1, 13) + "/" + (DateTime.Today.Year - edad));
+        int anio = DateTime.Today.Year - edad;
+        int mes = rnd.Next(1, 13);
+        int dia;
+
+        switch (mes){
+            case 2:
+                dia = DateTime.IsLeapYear(anio) ? rnd.Next(1, 30) : rnd.Next(1, 29);
+                break;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                dia = rnd.Next(1, 31);
+                break;
+            default:
+                dia = rnd.Next(1, 32);
+                break;
+        }
+        DateTime fecNaci = new DateTime(anio, mes, dia);
+
+        //DateTime fecNaci = DateTime.Parse(rnd.Next(1, 31) + "/" + rnd.Next(1, 13) + "/" + (DateTime.Today.Year - edad));
         int nivel = i;
         int fue = rnd.Next(i, 11);
         int des = rnd.Next(i, 11);

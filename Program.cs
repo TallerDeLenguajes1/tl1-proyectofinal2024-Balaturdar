@@ -69,10 +69,14 @@ do
             Enemigos = fabrica.CrearPersonajes(10);
             PersonajesJson.GuardarPersonaje(Jugador, nombrePartida);
             PersonajesJson.GuardarEnemigos(Enemigos, nombrePartida);
-            Console.WriteLine("The fighter who will represent you is:");
-            Console.WriteLine(Jugador.InfoPj);
+            Console.Clear();
+            Console.WriteLine("The fighter who will represent you is:\n");
+            Thread.Sleep(1200);
+            Console.WriteLine(Jugador.InfoPj()+"\n");
+            Thread.Sleep(1200);
             Console.WriteLine("Press any key to exit... ");
             Console.ReadKey();
+            Console.Clear();
 
             do
             {
@@ -264,7 +268,20 @@ do
 static bool combate(List<Personaje> Enemigos, Personaje Jugador, List<Insulto> insultos)
 {
     var Enemigo = Enemigos[0];
+    var vidaMaxPJ = Jugador.PVida;
     Personaje primero, segundo;
+
+    Console.WriteLine("####################################################################################################\n");
+            Thread.Sleep(1200);
+            Console.WriteLine(Jugador.InfoPj()+"\n");
+            Thread.Sleep(1200);
+            Console.WriteLine("\tVS\n");
+            Thread.Sleep(1200);
+            Console.WriteLine(Enemigo.InfoPj()+"\n");
+            Console.WriteLine("Press any key to continue... ");
+            Console.ReadKey();
+            Console.Clear();
+
 
     if (Enemigo.Turno + Tirada() > Jugador.Turno + Tirada())
     {
@@ -301,7 +318,10 @@ static bool combate(List<Personaje> Enemigos, Personaje Jugador, List<Insulto> i
             break;
         }
     } while (Enemigo.PVida > 0);
-
+    Console.WriteLine("\nPress any key to continue... ");
+    Console.ReadKey();
+    Console.Clear();
+    Jugador.PVida = vidaMaxPJ;
     return true;
 }
 
@@ -326,6 +346,8 @@ static void Pelea(Personaje atacante, Personaje defensor, bool contraataque, Lis
     //Thread.Sleep(500);
 
     var insulto = insultos.ElementAt(new Random().Next(0, insultos.Count())).Insult;
+    Thread.Sleep(1000);
+    Console.WriteLine("\n--------------------------------------------------------------------------------\n");
     Console.WriteLine($"{atacante.Nombre}: {insulto} ");
     Console.WriteLine($"attack skill: {ataqueFinal}\ndefense skill: {defensaFinal}");
     switch (aux)
