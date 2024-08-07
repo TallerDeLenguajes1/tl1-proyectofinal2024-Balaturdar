@@ -2,6 +2,37 @@
 
 int opc;
 bool aux;
+
+List<Insulto> insultos = null;
+var insulto = await GetInsultAsync();
+if (insulto != null)
+{
+    for (int i = 0; i < 12; i++)
+    {
+        insulto = await GetInsultAsync();
+        if (insulto == null)
+        {
+            break;
+        }
+        insultos.Add(insulto);
+    }
+}
+if (insultos == null)
+{
+    var jsonInsultos = GestorJson.AbrirArchivoTexto(Path.GetFullPath(@"../tl1-proyectofinal2024-Balaturdar/archivos/insults.json"));
+    insultos = JsonSerializer.Deserialize<List<Insulto>>(jsonInsultos);
+}
+if (insultos.Count() < 9)
+{
+    insultos.Clear();
+    var jsonInsultos = GestorJson.AbrirArchivoTexto(Path.GetFullPath(@"../tl1-proyectofinal2024-Balaturdar/archivos/insults.json"));
+    insultos = JsonSerializer.Deserialize<List<Insulto>>(jsonInsultos);
+}
+
+string? nombrePartida;
+List<Personaje>? Enemigos = null;
+Personaje? Jugador = null;
+
 do
 {
 
@@ -24,46 +55,10 @@ do
         Console.Clear();
     } while (!aux);
 
-    List<string> ListadoDePartidas = PersonajesJson.ListaDePartidasGuardadas();
-    int contador = 0;
-
-    List<Insulto> insultos = null;
-    var insulto = await GetInsultAsync();
-    if (insulto != null)
-    {
-        for (int i = 0; i < 12; i++)
-        {
-            insulto = await GetInsultAsync();
-            if (insulto == null)
-            {
-                break;
-            }
-            insultos.Add(insulto);
-        }
-    }
-    if (insultos == null)
-    {
-        var jsonInsultos = GestorJson.AbrirArchivoTexto(Path.GetFullPath(@"../tl1-proyectofinal2024-Balaturdar/archivos/insults.json"));
-        insultos = JsonSerializer.Deserialize<List<Insulto>>(jsonInsultos);
-    }
-    if (insultos.Count() < 9)
-    {
-        insultos.Clear();
-        var jsonInsultos = GestorJson.AbrirArchivoTexto(Path.GetFullPath(@"../tl1-proyectofinal2024-Balaturdar/archivos/insults.json"));
-        insultos = JsonSerializer.Deserialize<List<Insulto>>(jsonInsultos);
-    }
-
-    //var insultos = GestorJson.AbrirArchivoTexto(Path.GetFullPath(@"../tl1-proyectofinal2024-Balaturdar/archivos/insults.json"));
-    //List<Insulto> insultosprecargados = JsonSerializer.Deserialize<List<Insulto>>(insultos);
-
-    string? nombrePartida;
-    List<Personaje>? Enemigos = null;
-    Personaje? Jugador = null;
     switch (opc)
     {
         case 1://Nueva partida
             nombrePartida = PersonajesJson.CrearNuevaPartida();
-            bool resultadoPelea = true;
             FabricaPersonajes fabrica = new FabricaPersonajes();
             Jugador = fabrica.CrearPersonaje(1);
             Enemigos = fabrica.CrearPersonajes(10);
@@ -78,84 +73,7 @@ do
             Console.ReadKey();
             Console.Clear();
 
-            do
-            {
-                //EmpezarPartida
-                resultadoPelea = combate(Enemigos, Jugador, insultos);
-
-                PersonajesJson.GuardarPersonaje(Jugador, nombrePartida);
-                PersonajesJson.GuardarEnemigos(Enemigos, nombrePartida);
-                if (resultadoPelea)
-                {
-                    if (Enemigos.Count() > 0)
-                    {
-                        Console.WriteLine("Keep Fighting? Y/N");
-                        var SeguirPeleando = Console.ReadLine();
-                        if (SeguirPeleando != "Y" && SeguirPeleando != "y")
-                        {
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("You reach the top of the tower after having defeated all your enemies");
-                        Console.WriteLine("You find a book with the names of all the warriors who came here.");
-                        Console.WriteLine("Next to it there is a chest with your prize for overcoming the challenge.\n");
-                        Console.WriteLine("You write your name in the book and open the chest to claim your prize");
-                        Console.WriteLine("Inside the chest you find several t-shirts with a print that says");
-                        var remera = @"
-              ._               _.
-             /  `'''''   ''''''`  \
-        .-''`'-..______________..-'`''-.
-      /`\                             /`\
-    /`   |                           |   `\
-   /`    |         i beat the        |    `\
-  /      |                           |      \
- /       /      challenge tower      \       \
-/        |                           |        \
-'-._____.|     and all i got was     |._____.-'
-         |                           |
-         |        this stupid        |
-         |                           |
-         |          T-shirt          |
-         |                           |
-         |                           |
-         |                           |
-         |._                       _.'
-            `''-----------------''`
-               ";
-                        Console.WriteLine(remera);
-
-                        PersonajesJson.GuardarGanador(Jugador);
-
-                        //info jugador
-                        Console.WriteLine("¡¡¡THE NEW KING OF THE TOWER!!!");
-                        Console.WriteLine(Jugador.InfoPj());
-                        Console.WriteLine("Press any key to exit... ");
-                        Console.ReadKey();
-
-                        PersonajesJson.BorrarPartida(nombrePartida);
-                        Console.WriteLine("GAME OVER");
-
-                        Thread.Sleep(900);
-                        Console.WriteLine("Press any key to exit... ");
-                        Console.ReadKey();
-                        break;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine($"The Fight was fierce but \n{Jugador.Nombre}'s efforts were not enough and he perished \na at the hands of {Enemigos.ElementAt(0).Nombre}, \nafter having defeated {10 - Enemigos.Count()} enemies");
-                    Thread.Sleep(900);
-
-                    Console.WriteLine("GAME OVER");
-                    Thread.Sleep(900);
-                    Console.WriteLine("Press any key to exit... ");
-                    Console.ReadKey();
-                    PersonajesJson.BorrarPartida(nombrePartida);
-                }
-
-            } while (resultadoPelea);
+            EjecutarPartida(Jugador, Enemigos, nombrePartida, insultos);
 
             break;
         case 2://cargar partida
@@ -164,7 +82,7 @@ do
             {
                 break;
             }
-            
+
             Enemigos = PersonajesJson.LeerEnemigos(nombrePartida);
             Jugador = PersonajesJson.LeerJugador(nombrePartida);
             if (Jugador == null && Enemigos == null)
@@ -172,83 +90,9 @@ do
                 Console.WriteLine("No saved characters found in this game");
                 break;
             }
-            do
-            {
-                resultadoPelea = combate(Enemigos, Jugador, insultos);
 
-                PersonajesJson.GuardarPersonaje(Jugador, nombrePartida);
-                PersonajesJson.GuardarEnemigos(Enemigos, nombrePartida);
-                if (resultadoPelea)
-                {
-                    if (Enemigos.Count() > 0)
-                    {
-                        Console.WriteLine("Keep Fighting? Y/N");
-                        var SeguirPeleando = Console.ReadLine();
-                        if (SeguirPeleando != "Y" && SeguirPeleando != "y")
-                        {
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("You reach the top of the tower after having defeated all your enemies");
-                        Console.WriteLine("You find a book with the names of all the warriors who came here.");
-                        Console.WriteLine("Next to it there is a chest with your prize for overcoming the challenge.\n");
-                        Console.WriteLine("You write your name in the book and open the chest to claim your prize");
-                        Console.WriteLine("Inside the chest you find several t-shirts with a print that says");
-                        var remera = @"
-              ._               _.
-             /  `'''''   ''''''`  \
-        .-''`'-..______________..-'`''-.
-      /`\                             /`\
-    /`   |                           |   `\
-   /`    |         i beat the        |    `\
-  /      |                           |      \
- /       /      challenge tower      \       \
-/        |                           |        \
-'-._____.|     and all i got was     |._____.-'
-         |                           |
-         |        this stupid        |
-         |                           |
-         |          T-shirt          |
-         |                           |
-         |                           |
-         |                           |
-         |._                       _.'
-            `''-----------------''`
-               ";
-                        Console.WriteLine(remera);
+            EjecutarPartida(Jugador, Enemigos, nombrePartida, insultos);
 
-                        PersonajesJson.GuardarGanador(Jugador);
-
-                        //info jugador
-                        Console.WriteLine("¡¡¡THE NEW KING OF THE TOWER!!!");
-                        Console.WriteLine(Jugador.InfoPj());
-                        Console.WriteLine("Press any key to exit... ");
-                        Console.ReadKey();
-
-                        PersonajesJson.BorrarPartida(nombrePartida);
-                        Console.WriteLine("GAME OVER");
-
-                        Thread.Sleep(900);
-                        Console.WriteLine("Press any key to exit... ");
-                        Console.ReadKey();
-                        break;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine($"The Fight was fierce but \n{Jugador.Nombre}'s efforts were not enough and he perished \na at the hands of {Enemigos.ElementAt(0).Nombre}, \nafter having defeated {10 - Enemigos.Count()} enemies");
-                    Thread.Sleep(900);
-
-                    Console.WriteLine("GAME OVER");
-                    Thread.Sleep(900);
-                    Console.WriteLine("Press any key to exit... ");
-                    Console.ReadKey();
-                    PersonajesJson.BorrarPartida(nombrePartida);
-                }
-
-            } while (resultadoPelea);
             break;
         case 3://Ganadores
             var indice = 1;
@@ -420,6 +264,91 @@ static void Pelea(Personaje atacante, Personaje defensor, bool contraataque, Lis
     }
 }
 
+void EjecutarPartida(Personaje Jugador, List<Personaje> Enemigos, string nombrePartida, List<Insulto> insultos)
+{
+    bool resultadoPelea;
+    do
+    {
+        // EmpezarPartida
+        resultadoPelea = combate(Enemigos, Jugador, insultos);
+
+        PersonajesJson.GuardarPersonaje(Jugador, nombrePartida);
+        PersonajesJson.GuardarEnemigos(Enemigos, nombrePartida);
+        if (resultadoPelea)
+        {
+            Jugador.SubirNivel();
+            if (Enemigos.Count() > 0)
+            {
+                Console.WriteLine("Keep Fighting? Y/N");
+                var seguirPeleando = Console.ReadLine();
+                if (seguirPeleando != "Y" && seguirPeleando != "y")
+                {
+                    break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("You reach the top of the tower after having defeated all your enemies");
+                Console.WriteLine("You find a book with the names of all the warriors who came here.");
+                Console.WriteLine("Next to it there is a chest with your prize for overcoming the challenge.\n");
+                Console.WriteLine("You write your name in the book and open the chest to claim your prize");
+                Console.WriteLine("Inside the chest you find several t-shirts with a print that says");
+                var remera = @"
+              ._               _.
+             /  `'''''   ''''''`  \
+        .-''`'-..______________..-'`''-.
+      /`\                             /`\
+    /`   |                           |   `\
+   /`    |         i beat the        |    `\
+  /      |                           |      \
+ /       /      challenge tower      \       \
+/        |                           |        \
+'-._____.|     and all i got was     |._____.-'
+         |                           |
+         |        this stupid        |
+         |                           |
+         |          T-shirt          |
+         |                           |
+         |                           |
+         |                           |
+         |._                       _.'
+            `''-----------------''`
+               ";
+                Console.WriteLine(remera);
+
+                PersonajesJson.GuardarGanador(Jugador);
+
+                // info jugador
+                Console.WriteLine("¡¡¡THE NEW KING OF THE TOWER!!!");
+                Console.WriteLine(Jugador.InfoPj());
+                Console.WriteLine("Press any key to exit... ");
+                Console.ReadKey();
+
+                PersonajesJson.BorrarPartida(nombrePartida);
+                Console.WriteLine("GAME OVER");
+
+                Thread.Sleep(900);
+                Console.WriteLine("Press any key to exit... ");
+                Console.ReadKey();
+                break;
+            }
+        }
+        else
+        {
+            Console.WriteLine($"The Fight was fierce but \n{Jugador.Nombre}'s efforts were not enough and he perished \na at the hands of {Enemigos.ElementAt(0).Nombre}, \nafter having defeated {10 - Enemigos.Count()} enemies");
+            Thread.Sleep(900);
+
+            Console.WriteLine("GAME OVER");
+            Thread.Sleep(900);
+            Console.WriteLine("Press any key to exit... ");
+            Console.ReadKey();
+            PersonajesJson.BorrarPartida(nombrePartida);
+        }
+
+    } while (resultadoPelea);
+}
+
+
 static async Task<Insulto> GetInsultAsync()
 {
     var url = "https://evilinsult.com/generate_insult.php?lang=en&type=json";
@@ -428,7 +357,7 @@ static async Task<Insulto> GetInsultAsync()
     {
         using (var cts = new CancellationTokenSource())
         {
-            cts.CancelAfter(400); // Cancel after 400 milliseconds
+            cts.CancelAfter(400);
             try
             {
                 HttpResponseMessage response = await client.GetAsync(url, cts.Token);
@@ -440,14 +369,10 @@ static async Task<Insulto> GetInsultAsync()
             catch (TaskCanceledException)
             {
                 return null;
-                //return insultosprecargados.ElementAt(new Random().Next(0, insultosprecargados.Count()));
             }
             catch (HttpRequestException e)
             {
-                //Console.WriteLine("Problemas de acceso a la API");
-                //Console.WriteLine("Message :{0} ", e.Message);
                 return null;
-                //return insultosprecargados.ElementAt(new Random().Next(0, insultosprecargados.Count()));
             }
         }
     }

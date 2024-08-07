@@ -31,8 +31,8 @@ public static class PersonajesJson
 
     public static List<Personaje>? LeerEnemigos(string nombrePartida)
     {
-        //var carpetapartidaguardada = Path.GetFullPath(rutaPartidaGuardada + nombrePartida + "/enemigos.json");
-        if (!Existe(rutaPartidaGuardada + nombrePartida + "/enemigos.json"))
+        var archivopartidaguardada = Path.GetFullPath(rutaPartidaGuardada + nombrePartida + "/enemigos.json");
+        if (!Existe(archivopartidaguardada))
         {
             return null;
         }
@@ -54,7 +54,7 @@ public static class PersonajesJson
 
     public static bool Existe(string nombreArchivo)
     {
-        return File.Exists(rutaPJ + nombreArchivo);
+        return File.Exists(nombreArchivo);
     }
 
 

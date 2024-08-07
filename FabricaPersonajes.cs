@@ -53,6 +53,7 @@ public class FabricaPersonajes
         string nombre = nombres[rnd.Next(0, nombres.Count())];
         string apodo = apodos[rnd.Next(0, apodos.Count())]; ;
         int edad = rnd.Next(20, 301);
+        
         int anio = DateTime.Today.Year - edad;
         int mes = rnd.Next(1, 13);
         int dia;
