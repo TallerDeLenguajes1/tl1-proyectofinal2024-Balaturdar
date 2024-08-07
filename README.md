@@ -4,10 +4,8 @@ Este es un juego de combates por turno de personajes de rol basados en el sistem
 
 todos los personajes son generados aleatoriamente, despues de cada combate se guarda la partida dando la posibilidad cargar partida en otro momento, tambien se pueden eliminar partidas y ver la informacion de los personajes que completaron el desafio.
 
-
-## Mecanicas Implementadas
-
 se implementaron una seleccion reducida de las reglas de creacion de personajes y combate
+## Mecanicas Implementadas
 
 ### Creacion de personaje
 
