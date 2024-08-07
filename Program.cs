@@ -10,7 +10,7 @@ do
     Console.WriteLine("** 1-Nueva Partida   **");
     Console.WriteLine("** 2-Cargar Partida  **");
     Console.WriteLine("** 3-Ganadores       **");
-    Console.WriteLine("** 4-Opciones        **");
+    Console.WriteLine("** 4-eliminar partida**");
     Console.WriteLine("** 5-Salir           **");
     Console.WriteLine("***********************");
     Console.WriteLine("\nenter a number to choose an option");
@@ -72,7 +72,7 @@ do
             Console.Clear();
             Console.WriteLine("The fighter who will represent you is:\n");
             Thread.Sleep(1200);
-            Console.WriteLine(Jugador.InfoPj()+"\n");
+            Console.WriteLine(Jugador.InfoPj() + "\n");
             Thread.Sleep(1200);
             Console.WriteLine("Press any key to exit... ");
             Console.ReadKey();
@@ -130,7 +130,7 @@ do
 
                         //info jugador
                         Console.WriteLine("¡¡¡THE NEW KING OF THE TOWER!!!");
-                        Console.WriteLine(Jugador.InfoPj);
+                        Console.WriteLine(Jugador.InfoPj());
                         Console.WriteLine("Press any key to exit... ");
                         Console.ReadKey();
 
@@ -164,10 +164,7 @@ do
             {
                 break;
             }
-
-            var lastIndex = nombrePartida.LastIndexOf('\\');
-            nombrePartida = nombrePartida.Substring(lastIndex + 1);
-
+            
             Enemigos = PersonajesJson.LeerEnemigos(nombrePartida);
             Jugador = PersonajesJson.LeerJugador(nombrePartida);
             if (Jugador == null && Enemigos == null)
@@ -226,7 +223,7 @@ do
 
                         //info jugador
                         Console.WriteLine("¡¡¡THE NEW KING OF THE TOWER!!!");
-                        Console.WriteLine(Jugador.InfoPj);
+                        Console.WriteLine(Jugador.InfoPj());
                         Console.WriteLine("Press any key to exit... ");
                         Console.ReadKey();
 
@@ -254,16 +251,49 @@ do
             } while (resultadoPelea);
             break;
         case 3://Ganadores
+            var indice = 1;
+            List<Personaje> ganadores = PersonajesJson.LeerGanadores();
+            if (ganadores == null || ganadores.Count() < 1)
+            {
+                Console.WriteLine("no one has reached the top of the tower yet");
+                Console.WriteLine("Press any key to continue... ");
+                Console.ReadKey();
+                break;
+            }
+            foreach (Personaje ganador in ganadores)
+            {
+                Console.WriteLine($"{indice} - {ganador.Nombre}");
+                indice++;
+            }
+
+
+            Console.WriteLine("Select one of the winners to see their information");
+            do
+            {
+                aux = int.TryParse(Console.ReadLine(), out indice);
+                if (!aux)
+                {
+                    Console.WriteLine("You must enter a number to select a character");
+                }
+                if (indice > ganadores.Count() || indice < 0)
+                {
+                    Console.WriteLine("enter a valid option");
+                }
+            } while (!aux || indice > ganadores.Count() || indice < 0);
+            Console.Clear();
+            Console.WriteLine("¡¡¡THE NEW KING OF THE TOWER!!!");
+            Console.WriteLine(ganadores[indice - 1].InfoPj());
+            Console.WriteLine("Press any key to continue... ");
+            Console.ReadKey();
+            Console.Clear();
             break;
-        case 4://Opciones
-            Console.WriteLine("no hay opciones XD");
+        case 4://eliminar partida
+            PersonajesJson.EliminarPartida();
             break;
         case 5://salir
             break;
-        case 6:
-            break;
     }
-} while (true);
+} while (opc != 5);
 
 static bool combate(List<Personaje> Enemigos, Personaje Jugador, List<Insulto> insultos)
 {
@@ -272,15 +302,15 @@ static bool combate(List<Personaje> Enemigos, Personaje Jugador, List<Insulto> i
     Personaje primero, segundo;
 
     Console.WriteLine("####################################################################################################\n");
-            Thread.Sleep(1200);
-            Console.WriteLine(Jugador.InfoPj()+"\n");
-            Thread.Sleep(1200);
-            Console.WriteLine("\tVS\n");
-            Thread.Sleep(1200);
-            Console.WriteLine(Enemigo.InfoPj()+"\n");
-            Console.WriteLine("Press any key to continue... ");
-            Console.ReadKey();
-            Console.Clear();
+    Thread.Sleep(1200);
+    Console.WriteLine(Jugador.InfoPj() + "\n");
+    Thread.Sleep(1200);
+    Console.WriteLine("\tVS\n");
+    Thread.Sleep(1200);
+    Console.WriteLine(Enemigo.InfoPj() + "\n");
+    Console.WriteLine("Press any key to continue... ");
+    Console.ReadKey();
+    Console.Clear();
 
 
     if (Enemigo.Turno + Tirada() > Jugador.Turno + Tirada())
