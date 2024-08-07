@@ -1,3 +1,5 @@
+using System.Reflection.Metadata.Ecma335;
+
 public class Personaje
 {
 
@@ -172,5 +174,21 @@ public class Personaje
         }
 
         return 20+ptoarmadura;
+    }
+
+    public string InfoPj(){
+
+        return "Name: " + Nombre + 
+               "\nNickname: " + Apodo + 
+               "\nCharacteristics: " +
+               "\nStrong: " + Fue +
+               "\nDextry: " + Des +
+               "\nAgility: " + Agi +
+               "\nConstitution: " + Con +
+               "\nlevel: " + Nivel +
+               "\nClass: " + Cat +
+               "\nweapon: " + Arma +
+               "\nShield: " + Escudo +
+               "\nArmor: " + Armadura;
     }
 }

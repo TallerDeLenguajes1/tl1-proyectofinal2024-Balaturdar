@@ -13,13 +13,13 @@ do
     Console.WriteLine("** 4-Opciones        **");
     Console.WriteLine("** 5-Salir           **");
     Console.WriteLine("***********************");
-    Console.WriteLine("\ningrese un numero para elegir una opcion");
+    Console.WriteLine("\nenter a number to choose an option");
     do
     {
         aux = int.TryParse(Console.ReadLine(), out opc);
         if (!aux)
         {
-            Console.WriteLine("debe ingresar un numero para seleccionar una opcion");
+            Console.WriteLine("You must enter a number to select an option");
         }
         Console.Clear();
     } while (!aux);
@@ -28,12 +28,14 @@ do
     int contador = 0;
 
     List<Insulto> insultos = null;
-    var insulto =  await GetInsultAsync();
-    if(insulto != null){
+    var insulto = await GetInsultAsync();
+    if (insulto != null)
+    {
         for (int i = 0; i < 12; i++)
         {
-            insulto =  await GetInsultAsync();
-            if(insulto == null){
+            insulto = await GetInsultAsync();
+            if (insulto == null)
+            {
                 break;
             }
             insultos.Add(insulto);
@@ -44,7 +46,8 @@ do
         var jsonInsultos = GestorJson.AbrirArchivoTexto(Path.GetFullPath(@"../tl1-proyectofinal2024-Balaturdar/archivos/insults.json"));
         insultos = JsonSerializer.Deserialize<List<Insulto>>(jsonInsultos);
     }
-    if(insultos.Count() <9 ){
+    if (insultos.Count() < 9)
+    {
         insultos.Clear();
         var jsonInsultos = GestorJson.AbrirArchivoTexto(Path.GetFullPath(@"../tl1-proyectofinal2024-Balaturdar/archivos/insults.json"));
         insultos = JsonSerializer.Deserialize<List<Insulto>>(jsonInsultos);
@@ -53,72 +56,111 @@ do
     //var insultos = GestorJson.AbrirArchivoTexto(Path.GetFullPath(@"../tl1-proyectofinal2024-Balaturdar/archivos/insults.json"));
     //List<Insulto> insultosprecargados = JsonSerializer.Deserialize<List<Insulto>>(insultos);
 
-    string? nombre;
+    string? nombrePartida;
     List<Personaje>? Enemigos = null;
     Personaje? Jugador = null;
     switch (opc)
     {
         case 1://Nueva partida
-            nombre = PersonajesJson.CrearNuevaPartida();
+            nombrePartida = PersonajesJson.CrearNuevaPartida();
             bool resultadoPelea = true;
             FabricaPersonajes fabrica = new FabricaPersonajes();
             Jugador = fabrica.CrearPersonaje(1);
             Enemigos = fabrica.CrearPersonajes(10);
-            PersonajesJson.GuardarPersonaje(Jugador, nombre);
-            PersonajesJson.GuardarEnemigos(Enemigos, nombre);
+            PersonajesJson.GuardarPersonaje(Jugador, nombrePartida);
+            PersonajesJson.GuardarEnemigos(Enemigos, nombrePartida);
+            Console.WriteLine("The fighter who will represent you is:");
+            Console.WriteLine(Jugador.InfoPj);
+            Console.WriteLine("Press any key to exit... ");
+            Console.ReadKey();
 
             do
             {
                 //EmpezarPartida
                 resultadoPelea = combate(Enemigos, Jugador, insultos);
 
-                PersonajesJson.GuardarPersonaje(Jugador, nombre);
-                PersonajesJson.GuardarEnemigos(Enemigos, nombre);
+                PersonajesJson.GuardarPersonaje(Jugador, nombrePartida);
+                PersonajesJson.GuardarEnemigos(Enemigos, nombrePartida);
                 if (resultadoPelea)
                 {
                     if (Enemigos.Count() > 0)
                     {
-                        Console.WriteLine("¿Seguir Peleando? S/N");
+                        Console.WriteLine("Keep Fighting? Y/N");
                         var SeguirPeleando = Console.ReadLine();
-                        if (SeguirPeleando != "S" && SeguirPeleando != "s")
+                        if (SeguirPeleando != "Y" && SeguirPeleando != "y")
                         {
                             break;
                         }
                     }
                     else
                     {
-                        Console.WriteLine("Llegas a la cima de la torre luego de haber derrotado a todos tus enemigos");
-                        Console.WriteLine("Encuentras un libro con los nombres de todos los guerreros que llegaron hasta aqui");
-                        Console.WriteLine("Al lado un cofre con tu premio por superar el desafio\n");
-                        Console.WriteLine("Escribes tu nombre y abres el cofre para reclamar tu premio");
-                        Console.WriteLine("Dentro del cofre encuentras varias remeras con un estampado que dice");
-                        Console.WriteLine("\t\"Derrote todos los enemigos\n\tde la torre y lo único que\n\tconsegui es esta estúpida\n\t\tremera");
+                        Console.WriteLine("You reach the top of the tower after having defeated all your enemies");
+                        Console.WriteLine("You find a book with the names of all the warriors who came here.");
+                        Console.WriteLine("Next to it there is a chest with your prize for overcoming the challenge.\n");
+                        Console.WriteLine("You write your name in the book and open the chest to claim your prize");
+                        Console.WriteLine("Inside the chest you find several t-shirts with a print that says");
+                        var remera = @"
+              ._               _.
+             /  `'''''   ''''''`  \
+        .-''`'-..______________..-'`''-.
+      /`\                             /`\
+    /`   |                           |   `\
+   /`    |         i beat the        |    `\
+  /      |                           |      \
+ /       /      challenge tower      \       \
+/        |                           |        \
+'-._____.|     and all i got was     |._____.-'
+         |                           |
+         |        this stupid        |
+         |                           |
+         |          T-shirt          |
+         |                           |
+         |                           |
+         |                           |
+         |._                       _.'
+            `''-----------------''`
+               ";
+                        Console.WriteLine(remera);
 
                         PersonajesJson.GuardarGanador(Jugador);
 
                         //info jugador
+                        Console.WriteLine("¡¡¡THE NEW KING OF THE TOWER!!!");
+                        Console.WriteLine(Jugador.InfoPj);
+                        Console.WriteLine("Press any key to exit... ");
+                        Console.ReadKey();
 
-                        PersonajesJson.BorrarPartida(nombre);
-                        Console.WriteLine("FIN DE LA PARTIDA");
+                        PersonajesJson.BorrarPartida(nombrePartida);
+                        Console.WriteLine("GAME OVER");
+
+                        Thread.Sleep(900);
+                        Console.WriteLine("Press any key to exit... ");
+                        Console.ReadKey();
                         break;
                     }
                 }
                 else
                 {
-                    Console.WriteLine($"La Pelea fue encarnizada pero los esfuerzos de \n{Jugador.Nombre} no fueron suficientes y perece \na manos de {Enemigos.ElementAt(0).Nombre}, \nluego de haber vencido a {10 - Enemigos.Count()} enemigos");
-                    Console.WriteLine("FIN DE LA PARTIDA");
-                    PersonajesJson.BorrarPartida(nombre);
+                    Console.WriteLine($"The Fight was fierce but \n{Jugador.Nombre}'s efforts were not enough and he perished \na at the hands of {Enemigos.ElementAt(0).Nombre}, \nafter having defeated {10 - Enemigos.Count()} enemies");
+                    Thread.Sleep(900);
+
+                    Console.WriteLine("GAME OVER");
+                    Thread.Sleep(900);
+                    Console.WriteLine("Press any key to exit... ");
+                    Console.ReadKey();
+                    PersonajesJson.BorrarPartida(nombrePartida);
                 }
 
             } while (resultadoPelea);
 
             break;
         case 2://cargar partida
-            var nombrePartida = PersonajesJson.cargarPartida(Jugador, Enemigos);
-            if(nombrePartida == null){
+            nombrePartida = PersonajesJson.cargarPartida(Jugador, Enemigos);
+            if (nombrePartida == null)
+            {
                 break;
             }
-            
+
             var lastIndex = nombrePartida.LastIndexOf('\\');
             nombrePartida = nombrePartida.Substring(lastIndex + 1);
 
@@ -126,7 +168,7 @@ do
             Jugador = PersonajesJson.LeerJugador(nombrePartida);
             if (Jugador == null && Enemigos == null)
             {
-                Console.WriteLine("No se encontraron personajes guardados en esta partida");
+                Console.WriteLine("No saved characters found in this game");
                 break;
             }
             do
@@ -139,35 +181,69 @@ do
                 {
                     if (Enemigos.Count() > 0)
                     {
-                        Console.WriteLine("¿Seguir Peleando? S/N");
+                        Console.WriteLine("Keep Fighting? Y/N");
                         var SeguirPeleando = Console.ReadLine();
-                        if (SeguirPeleando != "S" && SeguirPeleando != "s")
+                        if (SeguirPeleando != "Y" && SeguirPeleando != "y")
                         {
                             break;
                         }
                     }
                     else
                     {
-                        Console.WriteLine("Llegas a la cima de la torre luego de haber derrotado a todos tus enemigos");
-                        Console.WriteLine("Encuentras un libro con los nombres de todos los guerreros que llegaron hasta aqui");
-                        Console.WriteLine("Al lado un cofre con tu premio por superar el desafio\n");
-                        Console.WriteLine("Escribes tu nombre y abres el cofre para reclamar tu premio");
-                        Console.WriteLine("Dentro del cofre encuentras varias remeras con un estampado que dice");
-                        Console.WriteLine("\t\"Derrote todos los enemigos\n\tde la torre y lo único que\n\tconsegui es esta estúpida\n\t\tremera");
+                        Console.WriteLine("You reach the top of the tower after having defeated all your enemies");
+                        Console.WriteLine("You find a book with the names of all the warriors who came here.");
+                        Console.WriteLine("Next to it there is a chest with your prize for overcoming the challenge.\n");
+                        Console.WriteLine("You write your name in the book and open the chest to claim your prize");
+                        Console.WriteLine("Inside the chest you find several t-shirts with a print that says");
+                        var remera = @"
+              ._               _.
+             /  `'''''   ''''''`  \
+        .-''`'-..______________..-'`''-.
+      /`\                             /`\
+    /`   |                           |   `\
+   /`    |         i beat the        |    `\
+  /      |                           |      \
+ /       /      challenge tower      \       \
+/        |                           |        \
+'-._____.|     and all i got was     |._____.-'
+         |                           |
+         |        this stupid        |
+         |                           |
+         |          T-shirt          |
+         |                           |
+         |                           |
+         |                           |
+         |._                       _.'
+            `''-----------------''`
+               ";
+                        Console.WriteLine(remera);
 
                         PersonajesJson.GuardarGanador(Jugador);
 
                         //info jugador
+                        Console.WriteLine("¡¡¡THE NEW KING OF THE TOWER!!!");
+                        Console.WriteLine(Jugador.InfoPj);
+                        Console.WriteLine("Press any key to exit... ");
+                        Console.ReadKey();
 
                         PersonajesJson.BorrarPartida(nombrePartida);
-                        Console.WriteLine("FIN DE LA PARTIDA");
+                        Console.WriteLine("GAME OVER");
+
+                        Thread.Sleep(900);
+                        Console.WriteLine("Press any key to exit... ");
+                        Console.ReadKey();
                         break;
                     }
                 }
                 else
                 {
-                    Console.WriteLine($"La Pelea fue encarnizada pero los esfuerzos de \n{Jugador.Nombre} no fueron suficientes y perece \na manos de {Enemigos.ElementAt(0).Nombre}, \nluego de haber vencido a {10 - Enemigos.Count()} enemigos");
-                    Console.WriteLine("FIN DE LA PARTIDA");
+                    Console.WriteLine($"The Fight was fierce but \n{Jugador.Nombre}'s efforts were not enough and he perished \na at the hands of {Enemigos.ElementAt(0).Nombre}, \nafter having defeated {10 - Enemigos.Count()} enemies");
+                    Thread.Sleep(900);
+
+                    Console.WriteLine("GAME OVER");
+                    Thread.Sleep(900);
+                    Console.WriteLine("Press any key to exit... ");
+                    Console.ReadKey();
                     PersonajesJson.BorrarPartida(nombrePartida);
                 }
 
@@ -209,7 +285,7 @@ static bool combate(List<Personaje> Enemigos, Personaje Jugador, List<Insulto> i
         }
         if (Enemigo.PVida <= 0)
         {
-            Console.WriteLine($"¡¡¡{Jugador.Nombre} gana la pelea y pasa a la siguiente ronda!!!");
+            Console.WriteLine($"¡¡¡{Jugador.Nombre} win the fight and move on to the next round!!!");
             Enemigos.Remove(Enemigo);
             break;
         }
@@ -220,7 +296,7 @@ static bool combate(List<Personaje> Enemigos, Personaje Jugador, List<Insulto> i
         }
         if (Enemigo.PVida <= 0)
         {
-            Console.WriteLine($"¡¡¡{Jugador.Nombre} gana la pelea y pasa a la siguiente ronda!!!");
+            Console.WriteLine($"¡¡¡{Jugador.Nombre} win the fight and move on to the next round!!!");
             Enemigos.Remove(Enemigo);
             break;
         }
@@ -247,29 +323,29 @@ static void Pelea(Personaje atacante, Personaje defensor, bool contraataque, Lis
     defensaFinal += tiradaDefensa;
     var aux = ataqueFinal - defensaFinal;
     //Insulto insulto = await GetInsultAsync();
-    var insulto = insultos.ElementAt(new Random().Next(0,insultos.Count())).Insult;
+    //Thread.Sleep(500);
 
-    Thread.Sleep(500);
+    var insulto = insultos.ElementAt(new Random().Next(0, insultos.Count())).Insult;
     Console.WriteLine($"{atacante.Nombre}: {insulto} ");
-    Console.WriteLine($"Habilidad de Ataque: {ataqueFinal}\nHabilidad de Defensa: {defensaFinal}");
+    Console.WriteLine($"attack skill: {ataqueFinal}\ndefense skill: {defensaFinal}");
     switch (aux)
     {
         case < -50://contraataque
             if (!contraataque)
             {
-                Console.WriteLine($"{atacante.Nombre} falla el ataque, ¡{defensor.Nombre} puede contraatacar!");
+                Console.WriteLine($"{atacante.Nombre} fails the attack, {defensor.Nombre} can counterattack!");
                 Pelea(defensor, atacante, true, insultos);
                 break;
             }
-            Console.WriteLine($"{atacante.Nombre} falla el contraataque");
+            Console.WriteLine($"{atacante.Nombre} fails the counterattack!");
             break;
         case <= 0://ataque rechazado por el defensor
-            Console.WriteLine($"{defensor.Nombre}, logra rechazar el ataque de {atacante.Nombre}");
-            Console.WriteLine($"le quedan {defensor.PVida} puntos de vida");
+            Console.WriteLine($"{defensor.Nombre}, manages to repel the attack of {atacante.Nombre}");
+            Console.WriteLine($"has {defensor.PVida} life points left");
             break;
         case < 10://impacta pero no logra hacer daño
-            Console.WriteLine($"¡¡¡IMPACTO!!!\nEl ataque apenas logra superar la defensa de {defensor.Nombre}, pero no lo suficiente para hacer daño");
-            Console.WriteLine($"le quedan {defensor.PVida} puntos de vida");
+            Console.WriteLine($"IMPACT!!!\nThe attack barely breaks through {defensor.Nombre}'s defense, but not enough to do any damage");
+            Console.WriteLine($"has {defensor.PVida} life points left");
             break;
         case >= 10://impacta
             var danio = atacante.Arma.Danio + (int)Math.Floor((double)(aux / 10));
@@ -278,15 +354,15 @@ static void Pelea(Personaje atacante, Personaje defensor, bool contraataque, Lis
                 //mensaje impacta y hace daño
                 danio -= defensor.Absorcion(atacante.Arma.TArma);
                 defensor.PVida -= danio;
-                Console.WriteLine($"¡¡¡IMPACTO!!!\nEl ataque atraviesa la armadura de {defensor.Nombre} y realiza {danio} puntos de daño");
-                Console.WriteLine($"le quedan {defensor.PVida} puntos de vida");
+                Console.WriteLine($"IMPACT!!!\nThe attack pierces {defensor.Nombre} 's armor and deals {danio} points of damage");
+                Console.WriteLine($"has {defensor.PVida} life points left");
 
             }
             else
             {
                 //mensaje impacta y pero su armadura resiste
-                Console.WriteLine($"¡¡¡IMPACTO!!!\nEl ataque supera la defensa de {defensor.Nombre}, pero no logra atravezar su armadura");
-                Console.WriteLine($"le quedan {defensor.PVida} puntos de vida");
+                Console.WriteLine($"IMPACT!!!\nThe attack overcomes {defensor.Nombre}'s defense, but fails to penetrate his armor");
+                Console.WriteLine($"has {defensor.PVida} life points left");
             }
             break;
     }

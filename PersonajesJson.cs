@@ -103,14 +103,14 @@ public static class PersonajesJson{
 
         List<string> ListadoDePartidas = Directory.GetDirectories(rutaPartidaGuardada).ToList();
 
-        Console.WriteLine("** Ingrese un nombre para la partida **");
+        Console.WriteLine("** Enter a name for the game **");
         do
         {
             nombre = Console.ReadLine();
             if (nombre == null || nombre.Count() == 0)
             {
                 Console.Clear();
-                Console.WriteLine("** por favor,ingrese un nombre para guardar la partida **");
+                Console.WriteLine("** Please enter a name to save the game **");
             }
         } while (nombre == null || nombre.Count() == 0);
         int contador=0;
@@ -160,10 +160,10 @@ public static class PersonajesJson{
         {
             aux = int.TryParse(Console.ReadLine(), out indice);
             if(!aux){
-                Console.WriteLine("debe ingresar un numero para seleccionar una partida");
+                Console.WriteLine("You must enter a number to select a game");
             }
             if(indice > ListadoDePartidas.Count() || indice < 0){
-                Console.WriteLine("ingrese una opcion valida");
+                Console.WriteLine("enter a valid option");
             }
         } while (!aux || indice > ListadoDePartidas.Count() || indice < 0);
         Console.Clear();
