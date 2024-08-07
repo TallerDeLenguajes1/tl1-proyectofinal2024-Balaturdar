@@ -5,6 +5,11 @@ Este es un juego de combates por turno de personajes de rol basados en el sistem
 todos los personajes son generados aleatoriamente, despues de cada combate se guarda la partida dando la posibilidad cargar partida en otro momento, tambien se pueden eliminar partidas y ver la informacion de los personajes que completaron el desafio.
 
 se implementaron una seleccion reducida de las reglas de creacion de personajes y combate
+
+### API: EvilInsultGenerator
+La API `EvilInsultGenerator: https://evilinsult.com/generate_insult.php?lang=en&type=json` proporciona insultos generados aleatoriamente. La respuesta es un json con un insulto, fecha de creacion, lenguaje y en que web se encontro el insulto. Uso una clase para deserializar el json y capturar solo lo que me interesa que es el insulto generando una lista de insultos para elegir aleatoriamente en cada turno de la pelea. 
+Dadas frecuentes fallas en la respuesta de la API superando un tiempo de respuesta establecido de 400ms y más alto se carga la lista de insultos con insultos precargados de un json local, logrando con esto mas robustez y evitando lentitud en el programa por la espera de las respuestas.
+
 ## Mecanicas Implementadas
 
 ### Creacion de personaje
