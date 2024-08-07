@@ -165,7 +165,7 @@ public static class PersonajesJson
         if (ListadoDePartidas == null || ListadoDePartidas.Count() < 1)
         {
             Console.WriteLine("no saved games found");
-            Console.WriteLine("Press any key to exit... ");
+            Console.WriteLine("Press any key to continue... ");
             Console.ReadKey();
             return;
         }
@@ -183,7 +183,7 @@ public static class PersonajesJson
             Console.WriteLine(indice + "- " + partida);
             indice++;
         }
-        Console.WriteLine("select which game you want to delete");
+        Console.WriteLine("select which game you want to delete or ctrl+c to exit");
         do
         {
             aux = int.TryParse(Console.ReadLine(), out indice);
@@ -217,7 +217,7 @@ public static class PersonajesJson
         if (ListadoDePartidas == null || ListadoDePartidas.Count() < 1)
         {
             Console.WriteLine("no saved games found");
-            Console.WriteLine("Press any key to exit... ");
+            Console.WriteLine("Press any key to continue... ");
             Console.ReadKey();
             return null;
         }
@@ -232,6 +232,7 @@ public static class PersonajesJson
             Console.WriteLine(indice + "- " + partida);
             indice++;
         }
+        Console.WriteLine("Select which game you want to load or ctrl+c to exit");
         do
         {
             aux = int.TryParse(Console.ReadLine(), out indice);

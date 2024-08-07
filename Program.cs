@@ -69,7 +69,7 @@ do
             Thread.Sleep(1200);
             Console.WriteLine(Jugador.InfoPj() + "\n");
             Thread.Sleep(1200);
-            Console.WriteLine("Press any key to exit... ");
+            Console.WriteLine("Press any key to continue... ");
             Console.ReadKey();
             Console.Clear();
 
@@ -111,7 +111,7 @@ do
             }
 
 
-            Console.WriteLine("Select one of the winners to see their information");
+            Console.WriteLine("Select one of the winners to see their information or ctrl+c to exit");
             do
             {
                 aux = int.TryParse(Console.ReadLine(), out indice);
@@ -321,14 +321,14 @@ void EjecutarPartida(Personaje Jugador, List<Personaje> Enemigos, string nombreP
                 // info jugador
                 Console.WriteLine("¡¡¡THE NEW KING OF THE TOWER!!!");
                 Console.WriteLine(Jugador.InfoPj());
-                Console.WriteLine("Press any key to exit... ");
+                Console.WriteLine("Press any key to continue... ");
                 Console.ReadKey();
 
                 PersonajesJson.BorrarPartida(nombrePartida);
                 Console.WriteLine("GAME OVER");
 
                 Thread.Sleep(900);
-                Console.WriteLine("Press any key to exit... ");
+                Console.WriteLine("Press any key to continue... ");
                 Console.ReadKey();
                 break;
             }
@@ -340,7 +340,7 @@ void EjecutarPartida(Personaje Jugador, List<Personaje> Enemigos, string nombreP
 
             Console.WriteLine("GAME OVER");
             Thread.Sleep(900);
-            Console.WriteLine("Press any key to exit... ");
+            Console.WriteLine("Press any key to continue... ");
             Console.ReadKey();
             PersonajesJson.BorrarPartida(nombrePartida);
         }
